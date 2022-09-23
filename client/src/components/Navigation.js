@@ -18,6 +18,7 @@ import ProfileScreen from '../screens/ProfileScreen';
 
 // Components
 import AddArtwork from '../components/AddArtwork';
+import ArtworkInfo from '../components/ArtworkInfo';
 
 // const fullScreenWidth = Dimensions.get('window').width;
 
@@ -59,6 +60,7 @@ function ArtworkStackScreen() {
         }}
       />
       <Stack.Screen name="AddArtwork" component={AddArtwork} />
+      <Stack.Screen name="ArtworkInfo" component={ArtworkInfo} />
     </Stack.Navigator>
   );
 }
