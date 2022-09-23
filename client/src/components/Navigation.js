@@ -5,7 +5,7 @@ import { NavigationContainer, useNavigation } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
-import Ionicons from '@expo/vector-icons/Ionicons';
+import { Ionicons, FontAwesome5, MaterialIcons } from '@expo/vector-icons';
 
 import { StyleSheet, Dimensions, Button } from 'react-native';
 
@@ -33,8 +33,8 @@ function HomeStackScreen() {
 
 function ExhibitionStackScreen() {
   return (
-    <Stack.Navigator screenOptions={{ headerShown: false }}>
-      <Stack.Screen name="Exhibition" component={ExhibitionScreen} />
+    <Stack.Navigator screenOptions={{ headerTransparent: true }}>
+      <Stack.Screen name="Current" component={ExhibitionScreen} />
     </Stack.Navigator>
   );
 }
@@ -44,7 +44,6 @@ function ArtworkStackScreen() {
 
   return (
     <Stack.Navigator>
-      {/* screenOptions={{ headerShown: false }} */}
       <Stack.Screen
         name="Cabinet"
         component={ArtworkScreen}
@@ -66,7 +65,7 @@ function ArtworkStackScreen() {
 
 function TicketStackScreen() {
   return (
-    <Stack.Navigator screenOptions={{ headerShown: false }}>
+    <Stack.Navigator>
       <Stack.Screen name="Ticket" component={TicketScreen} />
     </Stack.Navigator>
   );
@@ -74,7 +73,7 @@ function TicketStackScreen() {
 
 function ProfileStackScreen() {
   return (
-    <Stack.Navigator screenOptions={{ headerShown: false }}>
+    <Stack.Navigator>
       <Stack.Screen name="Profile" component={ProfileScreen} />
       <Stack.Screen name="Home" component={HomeScreen} />
     </Stack.Navigator>
@@ -88,6 +87,7 @@ export default function Navigation() {
     <NavigationContainer>
       <Tab.Navigator
         screenOptions={({ route }) => ({
+          title: '',
           tabBarActiveTintColor: 'lavender',
           tabBarInactiveTintColor: 'grey',
           tabBarLabelStyle: {
@@ -99,62 +99,61 @@ export default function Navigation() {
             },
             null,
           ],
-          headerStyle: [
-            {
-              backgroundColor: 'transparent',
-            },
-          ],
+          // headerStyle: [
+          //   {
+          //     backgroundColor: 'transparent',
+          //   },
+          // ],
           headerShown: false,
         })}
       >
         <Tab.Screen
-          name="A"
+          name="HomeTab"
           component={HomeStackScreen}
           options={{
-            // headerShown: false,
-            tabBarLabel: 'Home',
+            // tabBarLabel: 'Home',
             tabBarIcon: ({ color, size }) => (
               <Ionicons name="home" color={color} size={size} />
             ),
           }}
         />
         <Tab.Screen
-          name="B"
+          name="ExhibitionTab"
           component={ExhibitionStackScreen}
           options={{
-            tabBarLabel: 'Current',
+            // tabBarLabel: 'Current',
             tabBarIcon: ({ color, size }) => (
-              <Ionicons name="home" color={color} size={size} />
+              <MaterialIcons name="museum" color={color} size={size} />
             ),
           }}
         />
         <Tab.Screen
-          name="C"
+          name="ArtworkTab"
           component={ArtworkStackScreen}
           options={{
-            tabBarLabel: 'Cabinet',
+            // tabBarLabel: 'Cabinet',
             tabBarIcon: ({ color, size }) => (
-              <Ionicons name="home" color={color} size={size} />
+              <Ionicons name="color-palette" color={color} size={size} />
             ),
           }}
         />
         <Tab.Screen
-          name="D"
+          name="TicketTab"
           component={TicketStackScreen}
           options={{
-            tabBarLabel: 'Ticket',
+            // tabBarLabel: 'Ticket',
             tabBarIcon: ({ color, size }) => (
-              <Ionicons name="home" color={color} size={size} />
+              <FontAwesome5 name="ticket-alt" color={color} size={size} />
             ),
           }}
         />
         <Tab.Screen
-          name="E"
+          name="ProfileTab"
           component={ProfileStackScreen}
           options={{
-            tabBarLabel: 'Profile',
+            // tabBarLabel: 'Profile',
             tabBarIcon: ({ color, size }) => (
-              <Ionicons name="home" color={color} size={size} />
+              <Ionicons name="ios-settings-sharp" color={color} size={size} />
             ),
           }}
         />
