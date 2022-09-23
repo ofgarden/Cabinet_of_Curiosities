@@ -4,7 +4,10 @@ import { StyleSheet, SafeAreaView, Text } from 'react-native';
 const ExhibitionScreen = () => {
   return (
     <SafeAreaView style={styles.container}>
-      <Text>Exhibition Screen</Text>
+      <Text style={styles.contentContainer}>
+        TODO: SPECIFIC INFORMATION FROM API
+      </Text>
+      <Text>TODO: AVOID OVERWARP HEADER</Text>
     </SafeAreaView>
   );
 };
@@ -15,6 +18,9 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
   },
+  // contentContainer: {
+  //   marginTop: 141,
+  // },
 });
 
 export default ExhibitionScreen;

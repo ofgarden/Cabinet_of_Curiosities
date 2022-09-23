@@ -16,7 +16,7 @@ import * as ImagePicker from 'expo-image-picker';
 import { useNavigation } from '@react-navigation/native';
 
 const db = Firebase.firestore();
-let user = Firebase.auth().currentUser;
+// let user = Firebase.auth().currentUser;
 // console.log('user', user.uid);
 
 // if (user) {
@@ -107,18 +107,20 @@ const AddArtwork = () => {
           console.log('saved: ', saved);
 
           // Create document by uid and create another collection which is artworks
-          // db.collection('Users').add(saved).then(() => {setTimeout(() => {}, 10000)}).catch((error) => {console.log(error)})
+          // TEST DB (WORKING!)
+          // db.collection('Test')
+          //   .add(saved)
+          //   .then(() => {
+          //     setTimeout(() => {}, 10000);
+          //   })
+          //   .catch((error) => {
+          //     console.log(error);
+          //   });
 
-          let testRef;
-          if (user) {
-            testRef = db
-              .collection('users')
-              .doc(user.uid)
-              .collection('artworks');
-          }
-
-          // 1
-          testRef
+          db.collection('Test')
+            // .doc(user.uid)
+            .doc('Test2')
+            .collection('artworks')
             .add(saved)
             .then(() => {
               setTimeout(() => {}, 10000);
@@ -126,6 +128,24 @@ const AddArtwork = () => {
             .catch((error) => {
               console.log(error);
             });
+
+          // let testRef;
+          // if (user) {
+          //   testRef = db
+          //     .collection('users')
+          //     .doc(user.uid)
+          //     .collection('artworks');
+          // }
+
+          // // 1
+          // testRef
+          //   .add(saved)
+          //   .then(() => {
+          //     setTimeout(() => {}, 10000);
+          //   })
+          //   .catch((error) => {
+          //     console.log(error);
+          //   });
 
           // 2
           // testRef
