@@ -1,8 +1,15 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useState, useEffect } from 'react';
-import { StyleSheet, View, FlatList, Image } from 'react-native';
-import { ScrollView } from 'react-native-gesture-handler';
+import {
+  StyleSheet,
+  View,
+  FlatList,
+  Image,
+  Pressable,
+  Text,
+} from 'react-native';
 import { db, auth } from '../../firebase';
+import { useNavigation } from '@react-navigation/native';
 
 const ArtworkScreen = () => {
   const [artworks, setArtworks] = useState([]);
@@ -29,27 +36,31 @@ const ArtworkScreen = () => {
     getData();
   }, []);
 
+  const navigation = useNavigation();
+  const handleNavigation = () => {
+    navigation.navigate('ArtworkInfo');
+  };
+
   return (
-    // <View style={styles.imageContainer}>
-    <ScrollView style={styles.container}>
-      <FlatList
-        data={artworks}
-        keyExtractor={(item) => item.id}
-        renderItem={({ item }) => (
+    // <ScrollView style={styles.container}>
+    <FlatList
+      data={artworks}
+      keyExtractor={(item) => item}
+      renderItem={({ item }) => (
+        <Pressable key={item.id} onPress={handleNavigation}>
           <View style={styles.item}>
-            {/* <TouchableHighlight onPress={() => {}}> */}
+            <Text>{item.title}</Text>
+            {/* !!!!!사용량 초과 방지용!!!!!
             <Image
               style={styles.image}
-              // resizeMode="cover"
+              resizeMode="cover"
               source={{ uri: item.image }}
-            />
-            {/* <Text>{item.artist}</Text> */}
-            {/* </TouchableHighlight> */}
+            /> */}
           </View>
-        )}
-      />
-      {/* </View> */}
-    </ScrollView>
+        </Pressable>
+      )}
+    />
+    // </ScrollView>
   );
 };
 
