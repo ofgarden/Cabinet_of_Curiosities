@@ -11,7 +11,6 @@ import { StyleSheet, Dimensions, Button } from 'react-native';
 
 // Screens
 import HomeScreen from '../screens/HomeScreen';
-import LoginScreen from '../screens/LoginScreen';
 import ExhibitionScreen from '../screens/ExhibitionScreen';
 import ArtworkScreen from '../screens/ArtworkScreen';
 import TicketScreen from '../screens/TicketScreen';
@@ -27,7 +26,6 @@ const Stack = createStackNavigator();
 function HomeStackScreen() {
   return (
     <Stack.Navigator screenOptions={{ headerShown: false }}>
-      <Stack.Screen name="Login" component={LoginScreen} />
       <Stack.Screen name="Home" component={HomeScreen} />
     </Stack.Navigator>
   );
@@ -78,7 +76,6 @@ function ProfileStackScreen() {
   return (
     <Stack.Navigator screenOptions={{ headerShown: false }}>
       <Stack.Screen name="Profile" component={ProfileScreen} />
-      <Stack.Screen name="Login" component={LoginScreen} />
       <Stack.Screen name="Home" component={HomeScreen} />
     </Stack.Navigator>
   );

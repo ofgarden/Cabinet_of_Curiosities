@@ -7,12 +7,11 @@ import { useNavigation } from '@react-navigation/native';
 const ProfileScreen = () => {
   const navigation = useNavigation();
 
-  // handleSignOut 문제가 크다^^..
   const handleSignOut = () => {
     auth
       .signOut()
       .then(() => {
-        navigation.replace('Login');
+        // navigation.replace('Login');
         // navigation.navigate('HomeStackScreen', {
         //   screen: 'Login',
         // });

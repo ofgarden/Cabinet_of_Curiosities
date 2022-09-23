@@ -8,18 +8,19 @@ import {
 } from 'react-native';
 import React, { useEffect, useState } from 'react';
 import { auth } from '../../firebase';
-import { useNavigation } from '@react-navigation/native';
+// import { useNavigation } from '@react-navigation/native';
 // import * as Firebase from 'firebase';
 
-const LoginScreen = () => {
+const LoginScreen = ({ setIsLoggedIn }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const navigation = useNavigation();
-
+  // const navigation = useNavigation();
+  // console.log({ navigation });
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged((user) => {
       if (user) {
-        navigation.replace('Home');
+        // navigation.navigate('Navigation');
+        setIsLoggedIn(true);
       }
     });
 
