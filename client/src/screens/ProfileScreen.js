@@ -1,32 +1,35 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { StyleSheet, SafeAreaView, Text, TouchableOpacity } from 'react-native';
 import { auth } from '../../firebase';
-
-import { useNavigation } from '@react-navigation/native';
+import { UserContext } from '../UserContext';
+import LoginScreen from './LoginScreen';
 
 const ProfileScreen = () => {
-  const navigation = useNavigation();
+  const { isLoggedIn, setIsLoggedIn } = useContext(UserContext);
 
   const handleSignOut = () => {
     auth
       .signOut()
       .then(() => {
-        // navigation.replace('Login');
-        // navigation.navigate('HomeStackScreen', {
-        //   screen: 'Login',
-        // });
+        setIsLoggedIn(false);
       })
       .catch((error) => console.log('[ERROR] ', error.message));
   };
 
   return (
-    <SafeAreaView style={styles.container}>
-      <Text>Profile Screen</Text>
-      <Text>Email: {auth.currentUser?.email}</Text>
-      <TouchableOpacity onPress={handleSignOut} style={styles.button}>
-        <Text style={styles.buttonText}>Sign out</Text>
-      </TouchableOpacity>
-    </SafeAreaView>
+    <>
+      {isLoggedIn ? (
+        <SafeAreaView style={styles.container}>
+          <Text>Profile Screen</Text>
+          <Text>Email: {auth.currentUser?.email}</Text>
+          <TouchableOpacity onPress={handleSignOut} style={styles.button}>
+            <Text style={styles.buttonText}>Sign out</Text>
+          </TouchableOpacity>
+        </SafeAreaView>
+      ) : (
+        <LoginScreen />
+      )}
+    </>
   );
 };
 

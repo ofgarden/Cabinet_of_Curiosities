@@ -8,24 +8,14 @@ import { UserContext } from './src/UserContext';
 
 export default function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [text, setText] = useState('hello from ADVANCED context');
-  // <NavigationContainer>
-  //   <Stack.Navigator screenOptions={{ headerShown: false }}>
-  //     <Stack.Screen name="Login" component={LoginScreen} />
-  //     <Stack.Screen name="Navigation" component={Navigation} />
-  //   </Stack.Navigator>
-  // </NavigationContainer>;
 
-  /*
-  user.isLoggedIn ? Navigation : LoginSceen
-
-*/
   return (
-    <UserContext.Provider value={{ text, setText }}>
+    <UserContext.Provider value={{ isLoggedIn, setIsLoggedIn }}>
       {isLoggedIn ? (
         <Navigation />
       ) : (
-        <LoginScreen setIsLoggedIn={setIsLoggedIn} />
+        <LoginScreen />
+        // <LoginScreen setIsLoggedIn={setIsLoggedIn} />
       )}
     </UserContext.Provider>
   );

@@ -6,14 +6,17 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import { auth } from '../../firebase';
+import { UserContext } from '../UserContext';
 // import { useNavigation } from '@react-navigation/native';
 // import * as Firebase from 'firebase';
 
-const LoginScreen = ({ setIsLoggedIn }) => {
+// const LoginScreen = ({ setIsLoggedIn }) => {
+const LoginScreen = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const { setIsLoggedIn } = useContext(UserContext);
   // const navigation = useNavigation();
   // console.log({ navigation });
   useEffect(() => {
