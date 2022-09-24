@@ -1,3 +1,4 @@
+import React, { useState } from 'react';
 import {
   StyleSheet,
   Text,
@@ -8,10 +9,9 @@ import {
   ActivityIndicator,
   TouchableOpacity,
 } from 'react-native';
-import React, { useState } from 'react';
 import * as Firebase from 'firebase';
 import * as ImagePicker from 'expo-image-picker';
-// import { firebaseConfig } from '../firebase';
+
 import { auth, db } from '../../firebase';
 import { useNavigation } from '@react-navigation/native';
 
@@ -97,7 +97,7 @@ const AddArtwork = () => {
             .add(saved)
             .then(() => {
               setTimeout(() => {}, 10000);
-              navigation.navigate('Cabinet');
+              navigation.navigate('Artwork');
             })
             .catch((error) => {
               console.log(error);
