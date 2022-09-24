@@ -10,13 +10,14 @@ import {
 import { useNavigation } from '@react-navigation/native';
 import { getArtwork } from '../services/artworkService';
 
-const ArtworkScreen = () => {
-  const [artworks, setArtworks] = useState([]);
+const ArtworkScreen = (props) => {
+  // const [artworks, setArtworks] = useState([]);
 
   // 자동 업데이트 되는 함수 추가! (previous exercise 참고)
-  useEffect(() => {
-    getArtwork().then((artworkslist) => setArtworks(artworkslist));
-  }, []);
+  // useEffect(() => {
+  //   getArtwork().then((artworkslist) => setArtworks(artworkslist));
+  // }, []);
+  const { artworks } = props;
 
   const navigation = useNavigation();
   const handleNavigation = () => {
@@ -28,7 +29,7 @@ const ArtworkScreen = () => {
     <View style={styles.container}>
       <FlatList
         data={artworks}
-        keyExtractor={(item) => item}
+        keyExtractor={(item, index) => index}
         renderItem={({ item }) => (
           <Pressable key={item.id} onPress={handleNavigation}>
             <View style={styles.item}>
@@ -62,7 +63,7 @@ const styles = StyleSheet.create({
     maxWidth: '100%',
   },
   item: {
-    width: 200,
+    width: 150,
     borderColor: 'red',
     borderWidth: 1,
   },

@@ -2,7 +2,7 @@ import 'react-native-gesture-handler';
 import React, { useState, useContext } from 'react';
 
 // SCREEN
-import Navigation from './src/components/Navigation';
+import Navigation from './src/navigations/Navigation';
 import LoginScreen from './src/screens/LoginScreen';
 
 // Context

@@ -1,85 +1,19 @@
 /* eslint-disable react/no-unstable-nested-components */
 /* eslint-disable react/react-in-jsx-scope */
-// Navigation
-import { NavigationContainer, useNavigation } from '@react-navigation/native';
-import { createStackNavigator } from '@react-navigation/stack';
+import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+
+// Stacks
+import ExhibitionStackScreen from '../navigations/ExhibitionStackScreen';
+import ArtworkStackScreen from '../navigations/ArtworkStackScreen';
+import HomeStackScreen from '../navigations/HomeStackScreen';
+import TicketStackScreen from '../navigations/TicketStackScreen';
+import ProfileStackScreen from '../navigations/ProfileStackScreen';
 
 import { Ionicons, FontAwesome5, MaterialIcons } from '@expo/vector-icons';
 
-import { Dimensions, Button } from 'react-native';
-
-// Screens
-import HomeScreen from '../screens/HomeScreen';
-import ExhibitionScreen from '../screens/ExhibitionScreen';
-import ArtworkScreen from '../screens/ArtworkScreen';
-import TicketScreen from '../screens/TicketScreen';
-import ProfileScreen from '../screens/ProfileScreen';
-
-// Components
-import AddArtwork from '../components/AddArtwork';
-import ArtworkInfo from '../components/ArtworkInfo';
-
+// import { Dimensions } from 'react-native';
 // const fullScreenWidth = Dimensions.get('window').width;
-
-const Stack = createStackNavigator();
-
-function HomeStackScreen() {
-  return (
-    <Stack.Navigator screenOptions={{ headerShown: false }}>
-      <Stack.Screen name="Home" component={HomeScreen} />
-    </Stack.Navigator>
-  );
-}
-
-function ExhibitionStackScreen() {
-  return (
-    <Stack.Navigator screenOptions={{ headerTransparent: true }}>
-      <Stack.Screen name="Current" component={ExhibitionScreen} />
-    </Stack.Navigator>
-  );
-}
-
-function ArtworkStackScreen() {
-  const navigation = useNavigation();
-
-  return (
-    <Stack.Navigator>
-      <Stack.Screen
-        name="Artwork"
-        component={ArtworkScreen}
-        options={{
-          headerTitle: 'Cabinet',
-          headerRight: () => (
-            <Button
-              onPress={() => navigation.navigate('AddArtwork')}
-              title="ICON"
-              color="black"
-            />
-          ),
-        }}
-      />
-      <Stack.Screen name="AddArtwork" component={AddArtwork} />
-      <Stack.Screen name="ArtworkInfo" component={ArtworkInfo} />
-    </Stack.Navigator>
-  );
-}
-
-function TicketStackScreen() {
-  return (
-    <Stack.Navigator>
-      <Stack.Screen name="Ticket" component={TicketScreen} />
-    </Stack.Navigator>
-  );
-}
-
-function ProfileStackScreen() {
-  return (
-    <Stack.Navigator>
-      <Stack.Screen name="Profile" component={ProfileScreen} />
-    </Stack.Navigator>
-  );
-}
 
 const Tab = createBottomTabNavigator();
 
@@ -107,7 +41,7 @@ export default function Navigation() {
           }}
         />
         <Tab.Screen
-          name="ExhibitionTab"
+          name="current"
           component={ExhibitionStackScreen}
           options={{
             // tabBarLabel: 'Current',

@@ -4,7 +4,7 @@ import { StyleSheet, SafeAreaView, Text } from 'react-native';
 const TicketScreen = () => {
   return (
     <SafeAreaView style={styles.container}>
-      <Text>Ticket Screen</Text>
+      <Text>Ticket Screen (refactored)</Text>
     </SafeAreaView>
   );
 };

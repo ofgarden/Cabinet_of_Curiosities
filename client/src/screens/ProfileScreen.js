@@ -25,7 +25,7 @@ const ProfileScreen = () => {
     <>
       {isLoggedIn ? (
         <SafeAreaView style={styles.container}>
-          <Text>Profile Screen</Text>
+          <Text>Profile Screen (refactor)</Text>
           <Text>Email: {auth.currentUser?.email}</Text>
           <TouchableOpacity onPress={handleSignOut} style={styles.button}>
             <Text style={styles.buttonText}>Sign out</Text>
