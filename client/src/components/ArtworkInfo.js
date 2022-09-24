@@ -1,10 +1,16 @@
 import { View, Text } from 'react-native';
 import React from 'react';
+import { FlatList } from 'react-native-gesture-handler';
 
-const ArtworkInfo = () => {
+const ArtworkInfo = ({ artworks }) => {
+  console.log('artworks form artworkInfo ', artworks);
   return (
     <View>
-      <Text>Artwork Info</Text>
+      <FlatList
+        data={artworks}
+        keyExtractor={(item, index) => index}
+        renderItem={({ item }) => <Text>{item.title}</Text>}
+      />
     </View>
   );
 };
