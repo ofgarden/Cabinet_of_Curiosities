@@ -1,5 +1,5 @@
-import React from 'react';
-
+/* eslint-disable react/no-unstable-nested-components */
+/* eslint-disable react/react-in-jsx-scope */
 // Navigation
 import { NavigationContainer, useNavigation } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
@@ -7,7 +7,7 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
 import { Ionicons, FontAwesome5, MaterialIcons } from '@expo/vector-icons';
 
-import { StyleSheet, Dimensions, Button } from 'react-native';
+import { Dimensions, Button } from 'react-native';
 
 // Screens
 import HomeScreen from '../screens/HomeScreen';
@@ -46,10 +46,10 @@ function ArtworkStackScreen() {
   return (
     <Stack.Navigator>
       <Stack.Screen
-        name="Cabinet"
+        name="Artwork"
         component={ArtworkScreen}
         options={{
-          // headerTitle:
+          headerTitle: 'Cabinet',
           headerRight: () => (
             <Button
               onPress={() => navigation.navigate('AddArtwork')}
@@ -77,7 +77,6 @@ function ProfileStackScreen() {
   return (
     <Stack.Navigator>
       <Stack.Screen name="Profile" component={ProfileScreen} />
-      <Stack.Screen name="Home" component={HomeScreen} />
     </Stack.Navigator>
   );
 }
@@ -92,20 +91,8 @@ export default function Navigation() {
           title: '',
           tabBarActiveTintColor: 'lavender',
           tabBarInactiveTintColor: 'grey',
-          tabBarLabelStyle: {
-            fontSize: 10,
-          },
-          tabBarStyle: [
-            {
-              display: 'flex',
-            },
-            null,
-          ],
-          // headerStyle: [
-          //   {
-          //     backgroundColor: 'transparent',
-          //   },
-          // ],
+          tabBarLabelStyle: { fontSize: 10 },
+          tabBarStyle: [{ display: 'flex' }, null],
           headerShown: false,
         })}
       >
@@ -163,9 +150,3 @@ export default function Navigation() {
     </NavigationContainer>
   );
 }
-
-const styles = StyleSheet.create({
-  icons: {
-    paddingBottom: 'padding',
-  },
-});
