@@ -1,39 +1,21 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useState, useEffect } from 'react';
 import {
   StyleSheet,
   View,
   FlatList,
-  Image,
+  // Image,
   Pressable,
   Text,
 } from 'react-native';
-import { db, auth } from '../../firebase';
 import { useNavigation } from '@react-navigation/native';
+import { getArtwork } from '../services/artworkService';
 
 const ArtworkScreen = () => {
   const [artworks, setArtworks] = useState([]);
 
-  // useContext?
-  let user = auth.currentUser;
-  const Test = db.collection('Test').doc(user.uid).collection('artworks');
-
-  // To service
-  const getData = async () => {
-    await Test.get().then((querySnapshot) => {
-      let artworksFromDb = [];
-      querySnapshot.forEach((doc) => {
-        // console.log(doc.id, " => ", doc.data());
-        artworksFromDb.push(doc.data());
-        // const result = doc.data()
-        // console.log('artworksFromDb', artworksFromDb)
-        setArtworks(artworksFromDb);
-      });
-    });
-  };
-
+  // 자동 업데이트 되는 함수 추가! (previous exercise 참고)
   useEffect(() => {
-    getData();
+    getArtwork().then((artworkslist) => setArtworks(artworkslist));
   }, []);
 
   const navigation = useNavigation();
@@ -41,26 +23,30 @@ const ArtworkScreen = () => {
     navigation.navigate('ArtworkInfo');
   };
 
+  // TODO [FIX]: Encountered two children with the same key,
   return (
-    // <ScrollView style={styles.container}>
-    <FlatList
-      data={artworks}
-      keyExtractor={(item) => item}
-      renderItem={({ item }) => (
-        <Pressable key={item.id} onPress={handleNavigation}>
-          <View style={styles.item}>
-            <Text>{item.title}</Text>
-            {/* !!!!!사용량 초과 방지용!!!!!
+    <View style={styles.container}>
+      <FlatList
+        data={artworks}
+        keyExtractor={(item) => item}
+        renderItem={({ item }) => (
+          <Pressable key={item.id} onPress={handleNavigation}>
+            <View style={styles.item}>
+              <Text>{item.title}</Text>
+              {/* !!!!!사용량 초과 방지용!!!!!
             <Image
               style={styles.image}
               resizeMode="cover"
               source={{ uri: item.image }}
             /> */}
-          </View>
-        </Pressable>
-      )}
-    />
-    // </ScrollView>
+            </View>
+          </Pressable>
+        )}
+        numColumns={2}
+        columnWrapperStyle={styles.row}
+        horizontal={false}
+      />
+    </View>
   );
 };
 
@@ -69,22 +55,16 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: 'white',
   },
-  imageContainer: {
-    felx: 1,
-    aspectRatio: 1.5,
-    margin: 20,
+  row: {
+    flex: 1,
+    justifyContent: 'space-between',
+    marginHorizontal: 16,
+    maxWidth: '100%',
   },
   item: {
-    flex: 1 / 3,
-    aspectRatio: 1,
-    margin: 2,
-  },
-  image: {
-    position: 'absolute',
-    top: 0,
-    left: 0,
-    bottom: 0,
-    right: 0,
+    width: 200,
+    borderColor: 'red',
+    borderWidth: 1,
   },
 });
 
