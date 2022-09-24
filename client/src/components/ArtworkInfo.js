@@ -4,7 +4,7 @@ import React from 'react';
 const ArtworkInfo = () => {
   return (
     <View>
-      <Text>ArtworkInfo</Text>
+      <Text>Artwork Info</Text>
     </View>
   );
 };

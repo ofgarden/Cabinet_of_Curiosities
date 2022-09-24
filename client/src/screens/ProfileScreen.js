@@ -4,6 +4,11 @@ import { auth } from '../../firebase';
 import { UserContext } from '../UserContext';
 import LoginScreen from './LoginScreen';
 
+// THINK: Create doc for user info? -> Maybe data for ProfileScreen?
+// 아니면 아예 프로필 화면에서 셋팅하고 거기서 데이터 저장하기..! 이게 더 낫다
+// db.collection('users').doc(user.uid).set({email: user.email})
+// db.collection('users').doc(user.uid).collection('artworks').doc('any');
+
 const ProfileScreen = () => {
   const { isLoggedIn, setIsLoggedIn } = useContext(UserContext);
 

@@ -1,3 +1,5 @@
+/* eslint-disable react-hooks/exhaustive-deps */
+import React, { useEffect, useState, useContext } from 'react';
 import {
   KeyboardAvoidingView,
   StyleSheet,
@@ -6,29 +8,22 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
-import React, { useEffect, useState, useContext } from 'react';
 import { auth } from '../../firebase';
 import { UserContext } from '../UserContext';
-// import { useNavigation } from '@react-navigation/native';
-// import * as Firebase from 'firebase';
 
-// const LoginScreen = ({ setIsLoggedIn }) => {
 const LoginScreen = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const { setIsLoggedIn } = useContext(UserContext);
-  // const navigation = useNavigation();
-  // console.log({ navigation });
+
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged((user) => {
       if (user) {
-        // navigation.navigate('Navigation');
         setIsLoggedIn(true);
       }
     });
 
     return unsubscribe;
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const handleSignUp = () => {
@@ -37,10 +32,6 @@ const LoginScreen = () => {
       .then((userCredentials) => {
         const user = userCredentials.user;
         console.log('Registered in with:', user.email);
-
-        // create doc for user
-        // db.collection('users').doc(user.uid).set({email: user.email})
-        // db.collection('users').doc(user.uid).collection('artworks').doc('any');
       })
       .catch((error) => console.log('[ERROR] ', error.message));
   };
@@ -88,8 +79,6 @@ const LoginScreen = () => {
   );
 };
 
-export default LoginScreen;
-
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -136,3 +125,5 @@ const styles = StyleSheet.create({
     fontSize: 16,
   },
 });
+
+export default LoginScreen;
