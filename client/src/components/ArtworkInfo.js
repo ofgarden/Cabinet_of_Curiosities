@@ -3,7 +3,6 @@ import React from 'react';
 import { FlatList } from 'react-native-gesture-handler';
 
 const ArtworkInfo = ({ artworks }) => {
-  console.log('artworks form artworkInfo ', artworks);
   return (
     <View>
       <FlatList

@@ -18,6 +18,7 @@ export default function ArtworkStackScreen() {
   const [artworks, setArtworks] = useState([]);
   const navigation = useNavigation();
 
+  // 자동 업데이트 되는 함수 추가! (previous exercise 참고)
   useEffect(() => {
     getArtwork().then((artworkslist) => setArtworks(artworkslist));
   }, []);

@@ -3,49 +3,51 @@ import {
   StyleSheet,
   View,
   FlatList,
-  // Image,
+  Image,
   Pressable,
   Text,
+  Dimensions,
 } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { getArtwork } from '../services/artworkService';
 
+const screenWidth = Dimensions.get('window').width - 50;
+const screenHeight = Dimensions.get('window').height;
+const numColumns = 3;
+const imageSize = screenWidth / numColumns - 10;
+
 const ArtworkScreen = (props) => {
-  // const [artworks, setArtworks] = useState([]);
-
-  // 자동 업데이트 되는 함수 추가! (previous exercise 참고)
-  // useEffect(() => {
-  //   getArtwork().then((artworkslist) => setArtworks(artworkslist));
-  // }, []);
   const { artworks } = props;
+  // const [artwork, setArtwork] = useState();
 
+  // console.log(artworks[0]);
+  // 내가 클릭한 버튼의 데이터를 어떻게 보내지...? 하.. 제일 중요한 걸 .. ^^ ㅅ..ㅂ....
   const navigation = useNavigation();
   const handleNavigation = () => {
+    // console.log(event._dispatchInstances.memoizedProps.children);
+    // setArtwork()
     navigation.navigate('ArtworkInfo');
   };
 
-  // TODO [FIX]: Encountered two children with the same key,
   return (
     <View style={styles.container}>
       <FlatList
         data={artworks}
+        numColumns={3}
         keyExtractor={(item, index) => index}
         renderItem={({ item }) => (
           <Pressable key={item.id} onPress={handleNavigation}>
             <View style={styles.item}>
-              <Text>{item.title}</Text>
-              {/* !!!!!사용량 초과 방지용!!!!!
-            <Image
-              style={styles.image}
-              resizeMode="cover"
-              source={{ uri: item.image }}
-            /> */}
+              {/* <Text>{item.title}</Text> */}
+              {/* !!!!!사용량 초과 방지용!!!!! */}
+              <Image
+                style={styles.item}
+                resizeMode="cover"
+                source={{ uri: item.image }}
+              />
             </View>
           </Pressable>
         )}
-        numColumns={2}
-        columnWrapperStyle={styles.row}
-        horizontal={false}
       />
     </View>
   );
@@ -54,18 +56,21 @@ const ArtworkScreen = (props) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    height: screenHeight,
     backgroundColor: 'white',
-  },
-  row: {
-    flex: 1,
-    justifyContent: 'space-between',
-    marginHorizontal: 16,
-    maxWidth: '100%',
+    paddingLeft: 20,
+    paddingTop: 20,
   },
   item: {
-    width: 150,
-    borderColor: 'red',
-    borderWidth: 1,
+    height: imageSize,
+    width: imageSize,
+    marginRight: 20,
+    marginBottom: 20,
+    borderRadius: 15,
+    shadowColor: 'black',
+    shadowOpacity: 0.25,
+    shadowOffset: { width: 3, height: 1 },
+    shadowRadius: 2.5,
   },
 });
 
