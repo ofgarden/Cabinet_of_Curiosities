@@ -8,6 +8,7 @@ import {
   Image,
   ActivityIndicator,
   TouchableOpacity,
+  Pressable,
 } from 'react-native';
 import * as Firebase from 'firebase';
 import * as ImagePicker from 'expo-image-picker';
@@ -18,7 +19,7 @@ import { useNavigation } from '@react-navigation/native';
 const AddArtwork = () => {
   const [artist, setArtist] = useState('');
   const [title, setTitle] = useState('');
-  const [date, setDate] = useState('');
+  const [year, setYear] = useState('');
   const [medium, setMedium] = useState('');
 
   const [image, setImage] = useState(null);
@@ -80,21 +81,28 @@ const AddArtwork = () => {
           let user = auth.currentUser;
           console.log('user.uid: ', user.uid);
 
+          const dbRef = db
+            .collection('users')
+            .doc(user.uid)
+            .collection('artworks')
+            .doc();
+
+          const id = dbRef.id;
+          console.log(id);
+
           let saved = {
+            id: id,
             artist: artist,
             title: title,
-            date: date,
+            year: year,
             medium: medium,
             image: url,
           };
 
           console.log('saved: ', saved);
 
-          db.collection('Test')
-            .doc(user.uid)
-            // .doc('Test2')
-            .collection('artworks')
-            .add(saved)
+          dbRef
+            .set(saved)
             .then(() => {
               setTimeout(() => {}, 10000);
               navigation.navigate('Artwork');
@@ -110,12 +118,15 @@ const AddArtwork = () => {
   return (
     <>
       <View style={styles.container}>
-        <Image source={{ uri: image }} style={styles.imageBox} />
-        <Button
-          style={styles.button}
-          title="choose image"
-          onPress={handlePickImage}
-        />
+        {image ? (
+          <Image source={{ uri: image }} style={styles.imageBox} />
+        ) : (
+          <Pressable>
+            <Text style={styles.imageBox} onPress={handlePickImage}>
+              Select Image
+            </Text>
+          </Pressable>
+        )}
 
         <View style={styles.inputContainer}>
           <TextInput
@@ -131,9 +142,9 @@ const AddArtwork = () => {
             style={styles.input}
           />
           <TextInput
-            placeholder="Date"
-            value={date}
-            onChangeText={(text) => setDate(text)}
+            placeholder="Year"
+            value={year}
+            onChangeText={(text) => setYear(text)}
             style={styles.input}
           />
           <TextInput
@@ -149,7 +160,7 @@ const AddArtwork = () => {
             {!uploading ? (
               <Button title="Submit to Database" onPress={handleSubmit} />
             ) : (
-              <ActivityIndicator size="large" color="#000" />
+              <ActivityIndicator size="small" color="#000" />
             )}
           </Text>
         </TouchableOpacity>
@@ -160,13 +171,16 @@ const AddArtwork = () => {
 
 const styles = StyleSheet.create({
   container: {
-    // flex: 1,
+    flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
+    backgroundColor: 'white',
   },
   imageBox: {
     width: 200,
     height: 200,
+    borderColor: 'red',
+    borderWidth: 1,
   },
   inputContainer: {
     width: '80%',
@@ -179,6 +193,7 @@ const styles = StyleSheet.create({
     marginTop: 5,
   },
   button: {
+    borderWidth: 3,
     backgroundColor: 'lavender',
     width: '60%',
     padding: 15,
