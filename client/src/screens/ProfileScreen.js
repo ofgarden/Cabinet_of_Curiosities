@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
 import { StyleSheet, SafeAreaView, Text, TouchableOpacity } from 'react-native';
 import { auth } from '../../firebase';
-import { UserContext } from '../UserContext';
+import { UserContext } from '../contexts/UserContext';
 import LoginScreen from './LoginScreen';
 
 // THINK: Create doc for user info? -> Maybe data for ProfileScreen?
