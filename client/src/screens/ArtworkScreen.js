@@ -1,33 +1,30 @@
-import React, { useState, useEffect } from 'react';
+import React, { useContext } from 'react';
 import {
-  StyleSheet,
-  View,
-  FlatList,
-  Image,
-  Pressable,
-  Text,
   Dimensions,
+  StyleSheet,
+  FlatList,
+  Pressable,
+  Image,
+  View,
+  Text,
 } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
-import { getArtwork } from '../services/artworkService';
+
+import { ArtworkContext } from '../contexts/ArtworkContext';
 
 const screenWidth = Dimensions.get('window').width - 50;
 const screenHeight = Dimensions.get('window').height;
 const numColumns = 3;
 const imageSize = screenWidth / numColumns - 10;
 
-const ArtworkScreen = (props) => {
-  const { artworks } = props;
-  // const [artwork, setArtwork] = useState();
-
-  // console.log(artworks[0]);
-  // 내가 클릭한 버튼의 데이터를 어떻게 보내지...? 하.. 제일 중요한 걸 .. ^^ ㅅ..ㅂ....
+const ArtworkScreen = ({ artworks }) => {
+  const { setTest } = useContext(ArtworkContext);
   const navigation = useNavigation();
-  const handleNavigation = () => {
-    // console.log(event._dispatchInstances.memoizedProps.children);
-    // setArtwork()
-    navigation.navigate('ArtworkInfo');
-  };
+
+  // const handleNavigation = (item) => {
+  // setTest(item.id); // 를 받아올 수가 없다.
+  //   navigation.navigate('ArtworkInfo');
+  // };
 
   return (
     <View style={styles.container}>
@@ -36,15 +33,21 @@ const ArtworkScreen = (props) => {
         numColumns={3}
         keyExtractor={(item, index) => index}
         renderItem={({ item }) => (
-          <Pressable key={item.id} onPress={handleNavigation}>
+          <Pressable
+            key={item.id}
+            onPress={() => {
+              setTest(item.id);
+              navigation.navigate('ArtworkInfo');
+            }}
+          >
             <View style={styles.item}>
-              {/* <Text>{item.title}</Text> */}
+              <Text>{item.id}</Text>
               {/* !!!!!사용량 초과 방지용!!!!! */}
-              <Image
+              {/* <Image
                 style={styles.item}
                 resizeMode="cover"
                 source={{ uri: item.image }}
-              />
+              /> */}
             </View>
           </Pressable>
         )}
