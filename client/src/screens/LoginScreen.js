@@ -2,14 +2,15 @@
 import React, { useEffect, useState, useContext } from 'react';
 import {
   KeyboardAvoidingView,
-  StyleSheet,
-  Text,
-  TextInput,
   TouchableOpacity,
+  StyleSheet,
+  TextInput,
+  Text,
   View,
 } from 'react-native';
 import { auth } from '../../firebase';
-import { UserContext } from '../UserContext';
+
+import { UserContext } from '../contexts/UserContext';
 
 const LoginScreen = () => {
   const [email, setEmail] = useState('');
