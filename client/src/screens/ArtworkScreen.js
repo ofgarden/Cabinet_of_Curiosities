@@ -18,7 +18,7 @@ const numColumns = 3;
 const imageSize = screenWidth / numColumns - 10;
 
 const ArtworkScreen = ({ artworks }) => {
-  const { setTest } = useContext(ArtworkContext);
+  const { setSelected } = useContext(ArtworkContext);
   const navigation = useNavigation();
 
   // const handleNavigation = (item) => {
@@ -36,18 +36,16 @@ const ArtworkScreen = ({ artworks }) => {
           <Pressable
             key={item.id}
             onPress={() => {
-              setTest(item.id);
+              setSelected(item.id);
               navigation.navigate('ArtworkInfo');
             }}
           >
             <View style={styles.item}>
-              <Text>{item.id}</Text>
-              {/* !!!!!사용량 초과 방지용!!!!! */}
-              {/* <Image
+              <Image
                 style={styles.item}
                 resizeMode="cover"
                 source={{ uri: item.image }}
-              /> */}
+              />
             </View>
           </Pressable>
         )}

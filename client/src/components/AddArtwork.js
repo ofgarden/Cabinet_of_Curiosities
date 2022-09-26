@@ -16,7 +16,7 @@ import * as ImagePicker from 'expo-image-picker';
 import { auth, db } from '../../firebase';
 import { useNavigation } from '@react-navigation/native';
 
-const AddArtwork = () => {
+const AddArtwork = ({ setArtworks }) => {
   const [artist, setArtist] = useState('');
   const [title, setTitle] = useState('');
   const [year, setYear] = useState('');
@@ -101,6 +101,8 @@ const AddArtwork = () => {
 
           console.log('saved: ', saved);
 
+          setArtworks((prev) => [...prev, saved]);
+
           dbRef
             .set(saved)
             .then(() => {
@@ -155,11 +157,17 @@ const AddArtwork = () => {
           />
         </View>
 
-        <TouchableOpacity style={styles.button}>
+        <TouchableOpacity style={styles.buttonOutline}>
           <Text>
             {!uploading ? (
-              <Button title="Submit to Database" onPress={handleSubmit} />
+              <Pressable onPress={handleSubmit}>
+                <View>
+                  {/* Text를 눌러야지만 동작..ㅡㅡ */}
+                  <Text style={styles.text}>Hello</Text>
+                </View>
+              </Pressable>
             ) : (
+              // <Button title="Cabinet" onPress={handleSubmit} />
               <ActivityIndicator size="small" color="#000" />
             )}
           </Text>
@@ -179,11 +187,14 @@ const styles = StyleSheet.create({
   imageBox: {
     width: 200,
     height: 200,
-    borderColor: 'red',
+    borderColor: '#D9D9D9',
     borderWidth: 1,
+    borderRadius: 10,
   },
   inputContainer: {
     width: '80%',
+    borderWidth: 1,
+    marginTop: 30,
   },
   input: {
     backgroundColor: 'white',
@@ -192,25 +203,14 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     marginTop: 5,
   },
-  button: {
-    borderWidth: 3,
-    backgroundColor: 'lavender',
-    width: '60%',
-    padding: 15,
-    borderRadius: 10,
-    alignItems: 'center',
-    marginTop: 40,
-  },
   buttonOutline: {
+    width: '30%',
+    padding: 5,
+    borderRadius: 20,
     backgroundColor: 'white',
-    marginTop: 5,
+    marginTop: 30,
     borderColor: 'lavender',
     borderWidth: 2,
-  },
-  buttonText: {
-    color: 'white',
-    fontWeight: '700',
-    fontSize: 16,
   },
 });
 
