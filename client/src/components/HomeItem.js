@@ -5,6 +5,7 @@ import {
   Dimensions,
   ImageBackground,
   Pressable,
+  Image,
 } from 'react-native';
 import React from 'react';
 import { useNavigation } from '@react-navigation/native';
@@ -14,7 +15,6 @@ import { useFonts } from 'expo-font';
 
 const ExhibitionItem = ({ exhibition }) => {
   const { title, poster, begindate, enddate, venues } = exhibition;
-  const navigation = useNavigation();
   const [fontsLoaded] = useFonts({
     'Poppins-Regular': require('../assets/fonts/Poppins-Regular.ttf'),
     'Poppins-Bold': require('../assets/fonts/Poppins-Bold.ttf'),
@@ -25,71 +25,45 @@ const ExhibitionItem = ({ exhibition }) => {
   if (!fontsLoaded) {
     return null;
   }
-
   return (
-    // <View style={styles.container}>
-    <ImageBackground
-      resizeMode="cover"
-      source={
-        poster
-          ? { uri: poster.imageurl }
-          : require('../assets/images/default.png')
-      }
-      style={styles.container}
-      imageStyle={{ opacity: 0.8 }}
-    ></ImageBackground>
-    // </View>
+    <View style={styles.container}>
+      <ImageBackground
+        resizeMode="cover"
+        source={
+          poster
+            ? { uri: poster.imageurl }
+            : require('../assets/images/default.png')
+        }
+        style={styles.items}
+        imageStyle={{ opacity: 0.8 }}
+      >
+        <Text style={styles.title}>{title}</Text>
+      </ImageBackground>
+    </View>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
-    felx: 1,
-    height: Dimensions.get('window').height - 79,
-    width: Dimensions.get('window').width,
-    // width: 100,
-    // height: 200,
-    justifyContent: 'center',
-    alignItems: 'center',
-    // margin: 50,
-    // borderWidth: 1,
-    // borderColor: 'red',
-    // paddingHorizontal: 15,
-    // paddingVertical: 10,
-    // alignItems: 'center',
+    paddingHorizontal: 15,
   },
   items: {
     flex: 1,
     width: Dimensions.get('window').width - 40,
-    height: 180,
     padding: 15,
-    marginTop: 10,
-    borderWidth: 1,
-    borderRadius: 15,
     borderColor: '#152238',
     overflow: 'hidden',
+    borderRadius: 20,
   },
   title: {
-    fontFamily: 'Poppins-Bold',
+    fontFamily: 'Poppins-Medium',
     fontSize: 18,
-    color: 'black',
-    marginBottom: 15,
-  },
-  // date_container: {
-  //   textAlign: 'center',
-  // },
-  date: {
-    fontFamily: 'Poppins-Regular',
-    fontSize: 13,
-    // borderWidth: 1,
-    textAlign: 'left',
-  },
-  date_mark: {
-    fontSize: 11,
-  },
-  image: {
-    height: 100,
-    width: 100,
+    top: 390,
+    color: 'white',
+    textShadowColor: 'grey',
+    textShadowOpacity: 0.2,
+    textShadowOffset: { width: 2, height: 3 },
+    textShadowRadius: 2,
   },
 });
 
