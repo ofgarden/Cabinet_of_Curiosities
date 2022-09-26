@@ -45,11 +45,11 @@ const ExhibitionItem = ({ exhibition }) => {
 
 const styles = StyleSheet.create({
   container: {
-    paddingHorizontal: 15,
+    paddingHorizontal: 5,
   },
   items: {
     flex: 1,
-    width: Dimensions.get('window').width - 40,
+    width: Dimensions.get('window').width,
     padding: 15,
     borderColor: '#152238',
     overflow: 'hidden',

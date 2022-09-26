@@ -1,10 +1,10 @@
 /* eslint-disable react/no-unstable-nested-components */
-
 import React, { useState, useEffect } from 'react';
 import { Button } from 'react-native';
 
 import { createStackNavigator } from '@react-navigation/stack';
 import { useNavigation } from '@react-navigation/native';
+import { Ionicons } from '@expo/vector-icons';
 
 import { ArtworkContext } from '../contexts/ArtworkContext';
 import { getArtworks } from '../services/artworkService';
@@ -24,10 +24,8 @@ export default function ArtworkStackScreen() {
     const data = await getArtworks();
     setArtworks(data);
   }
-  // TODO: 자동 업데이트 되는 함수 추가! (previous exercise 참고) 안됨
-  // 새로고침 해야지만 나옴...
+
   useEffect(() => {
-    // getArtworks().then((artworkslist) => setArtworks(artworkslist));
     updateArtworks();
   }, []);
 
@@ -38,6 +36,14 @@ export default function ArtworkStackScreen() {
           headerStyle: {
             backgroundColor: '#152238',
           },
+          headerBackImage: () => (
+            <Ionicons
+              name="ios-chevron-back"
+              size={25}
+              color="white"
+              style={{ paddingLeft: 10 }}
+            />
+          ),
           headerTitleAlign: 'left',
           headerTintColor: '#FFFFF3',
           headerTitleStyle: {
@@ -52,28 +58,29 @@ export default function ArtworkStackScreen() {
           options={{
             headerTitle: 'Cabinet',
             headerRight: () => (
-              <Button
+              <Ionicons
                 onPress={() => navigation.navigate('AddArtwork')}
-                title="+"
+                name="add-circle-outline"
+                size={25}
                 color="white"
+                style={{ paddingRight: 10 }}
               />
             ),
           }}
         >
           {(props) => <ArtworkScreen artworks={artworks} />}
         </Stack.Screen>
-        <Stack.Screen name="ArtworkInfo">
+        <Stack.Screen
+          name="ArtworkInfo"
+          options={{ headerTitle: '', headerBackTitleVisible: false }}
+        >
           {(props) => <ArtworkInfo artworks={artworks} selected={selected} />}
         </Stack.Screen>
         <Stack.Screen
           name="AddArtwork"
-          // setArtworks={setArtworks}
-          // component={AddArtwork}
           options={{
-            headerBackTitle: false,
-            headerTitle: false,
-            // headerShown: false,
-            // headerBackImageSource:
+            headerTitle: '',
+            headerBackTitleVisible: false,
           }}
         >
           {(props) => <AddArtwork setArtworks={setArtworks} />}
