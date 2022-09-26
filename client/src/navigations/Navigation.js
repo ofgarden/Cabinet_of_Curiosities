@@ -1,9 +1,9 @@
 /* eslint-disable react/no-unstable-nested-components */
-/* eslint-disable react/react-in-jsx-scope */
 import React, { useState, useEffect } from 'react';
 
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { Ionicons, FontAwesome5, MaterialIcons } from '@expo/vector-icons';
 
 // Stacks
 import ExhibitionStackScreen from '../navigations/ExhibitionStackScreen';
@@ -12,23 +12,11 @@ import HomeStackScreen from '../navigations/HomeStackScreen';
 import TicketStackScreen from '../navigations/TicketStackScreen';
 import ProfileStackScreen from '../navigations/ProfileStackScreen';
 
-import { Ionicons, FontAwesome5, MaterialIcons } from '@expo/vector-icons';
-
 import { getExhibitions } from '../services/exhibitionService';
-// import { Dimensions } from 'react-native';
-// const fullScreenWidth = Dimensions.get('window').width;
 
 const Tab = createBottomTabNavigator();
 
 export default function Navigation() {
-  /*
-    state for exhibition
-
-    useEffect(()=>{
-      populate exhibition state
-    }, [])
-  */
-
   const [exhibitionData, setExhibitionData] = useState('');
 
   const fetchData = async () => {
@@ -42,10 +30,7 @@ export default function Navigation() {
 
   useEffect(() => {
     fetchData();
-    // console.log(data);
   }, []);
-
-  // console.log('data from navigation', data.records);
 
   return (
     <NavigationContainer>
@@ -61,9 +46,8 @@ export default function Navigation() {
       >
         <Tab.Screen
           name="HomeTab"
-          // component={HomeStackScreen}
           options={{
-            // tabBarLabel: 'Home',
+            tabBarLabel: 'Home',
             tabBarIcon: ({ color, size }) => (
               <Ionicons name="home" color={color} size={size} />
             ),
@@ -73,9 +57,9 @@ export default function Navigation() {
         </Tab.Screen>
         <Tab.Screen
           name="current"
-          // component={ExhibitionStackScreen}
           options={{
-            // tabBarLabel: 'Current',
+            unmountOnBlur: true,
+            tabBarLabel: 'Current',
             tabBarIcon: ({ color, size }) => (
               <MaterialIcons name="museum" color={color} size={size} />
             ),
@@ -87,7 +71,8 @@ export default function Navigation() {
           name="ArtworkTab"
           component={ArtworkStackScreen}
           options={{
-            // tabBarLabel: 'Cabinet',
+            unmountOnBlur: true,
+            tabBarLabel: 'Cabinet',
             tabBarIcon: ({ color, size }) => (
               <Ionicons name="color-palette" color={color} size={size} />
             ),
@@ -97,7 +82,7 @@ export default function Navigation() {
           name="TicketTab"
           component={TicketStackScreen}
           options={{
-            // tabBarLabel: 'Ticket',
+            tabBarLabel: 'Ticket',
             tabBarIcon: ({ color, size }) => (
               <FontAwesome5 name="ticket-alt" color={color} size={size} />
             ),
@@ -107,7 +92,7 @@ export default function Navigation() {
           name="ProfileTab"
           component={ProfileStackScreen}
           options={{
-            // tabBarLabel: 'Profile',
+            tabBarLabel: 'Profile',
             tabBarIcon: ({ color, size }) => (
               <Ionicons name="ios-settings-sharp" color={color} size={size} />
             ),

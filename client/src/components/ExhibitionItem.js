@@ -45,10 +45,15 @@ const ExhibitionItem = ({ exhibition }) => {
         >
           <Text style={styles.title}>{title}</Text>
           {/* <View style={styles.date_container}> */}
-          <Text style={styles.date}>
-            {begindate} <Text style={styles.date_mark}> to </Text> {enddate}{' '}
+          <Text style={styles.text_container}>
+            <Text style={styles.date}>
+              {begindate} <Text style={styles.date_mark}> to </Text> {enddate}{' '}
+            </Text>
+            {`\n`}
+            <Text style={styles.venue}>
+              {venues.map((item) => item.fullname)}
+            </Text>
           </Text>
-          <Text>{venues.map((item) => item.fullname)}</Text>
         </ImageBackground>
       </View>
     </Pressable>
@@ -68,31 +73,30 @@ const styles = StyleSheet.create({
     padding: 15,
     marginTop: 10,
     borderWidth: 1,
-    borderRadius: 15,
+    borderRadius: 20,
     borderColor: '#152238',
     overflow: 'hidden',
   },
   title: {
-    fontFamily: 'Poppins-Bold',
+    fontFamily: 'Poppins-SemiBold',
     fontSize: 18,
-    color: 'black',
     marginBottom: 15,
   },
-  // date_container: {
-  //   textAlign: 'center',
-  // },
+  text_container: {
+    fontFamily: 'Poppins-Regular',
+    textAlign: 'right',
+    top: 40,
+  },
   date: {
     fontFamily: 'Poppins-Regular',
-    fontSize: 13,
+    fontSize: 12,
     // borderWidth: 1,
-    textAlign: 'left',
   },
   date_mark: {
     fontSize: 11,
   },
-  image: {
-    height: 100,
-    width: 100,
+  venue: {
+    fontSize: 13,
   },
 });
 

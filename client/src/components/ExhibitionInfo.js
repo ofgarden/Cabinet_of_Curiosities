@@ -1,14 +1,23 @@
-import { View, Text } from 'react-native';
+import { View, Text, ScrollView, SafeAreaView } from 'react-native';
 import React from 'react';
 
 const ExhibitionInfo = ({ route }) => {
-  // console.log('title', title);
   const { exhibition } = route.params;
 
+  console.log('Exhibtiion ', exhibition);
+
   return (
-    <View>
+    <ScrollView>
       <Text>{exhibition.title}</Text>
-    </View>
+      <Text>{exhibition.url}</Text>
+      <Text>
+        {exhibition.textiledescription ? (
+          <Text>{exhibition.textiledescription}</Text>
+        ) : (
+          <Text>No description</Text>
+        )}
+      </Text>
+    </ScrollView>
   );
 };
 

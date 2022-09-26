@@ -41,6 +41,9 @@ const HomeScreen = ({ exhibitionData }) => {
           renderItem={({ item }) => {
             return <HomeItem key={item.id} exhibition={item} />;
           }}
+          snapToAlignment="start"
+          decelerationRate={'fast'}
+          snapToInterval={Dimensions.get('window').width}
         />
       </View>
     </SafeAreaView>
@@ -71,7 +74,7 @@ const styles = StyleSheet.create({
   },
   exhibition_container: {
     alignSelf: 'center',
-    width: Dimensions.get('window').width - 40,
+    // width: Dimensions.get('window').width - 40,
     height: Dimensions.get('window').height - 350,
     borderRadius: 20,
   },
