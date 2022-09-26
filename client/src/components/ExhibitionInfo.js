@@ -1,11 +1,13 @@
 import { View, Text } from 'react-native';
 import React from 'react';
 
-const ExhibitionInfo = ({ title, venues }) => {
-  console.log('title', title);
+const ExhibitionInfo = ({ route }) => {
+  // console.log('title', title);
+  const { exhibition } = route.params;
+
   return (
     <View>
-      <Text>{title}</Text>
+      <Text>{exhibition.title}</Text>
     </View>
   );
 };

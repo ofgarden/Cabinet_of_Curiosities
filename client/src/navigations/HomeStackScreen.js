@@ -4,10 +4,12 @@ import HomeScreen from '../screens/HomeScreen';
 
 const Stack = createStackNavigator();
 
-export default function HomeStackScreen() {
+export default function HomeStackScreen({ exhibitionData }) {
   return (
     <Stack.Navigator screenOptions={{ headerShown: false }}>
-      <Stack.Screen name="Home" component={HomeScreen} />
+      <Stack.Screen name="Home">
+        {(props) => <HomeScreen exhibitionData={exhibitionData} />}
+      </Stack.Screen>
     </Stack.Navigator>
   );
 }
