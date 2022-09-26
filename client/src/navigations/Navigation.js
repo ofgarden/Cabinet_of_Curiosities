@@ -23,10 +23,10 @@ export default function Navigation() {
       <Tab.Navigator
         screenOptions={({ route }) => ({
           title: '',
-          tabBarActiveTintColor: 'lavender',
-          tabBarInactiveTintColor: 'grey',
+          tabBarActiveTintColor: '#FFFFF3',
+          tabBarInactiveTintColor: '#D9D9D9',
           tabBarLabelStyle: { fontSize: 10 },
-          tabBarStyle: [{ display: 'flex' }, null],
+          tabBarStyle: [{ display: 'flex', backgroundColor: '#152238' }, null],
           headerShown: false,
         })}
       >
