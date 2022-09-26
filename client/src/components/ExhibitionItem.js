@@ -4,15 +4,17 @@ import {
   StyleSheet,
   Dimensions,
   ImageBackground,
+  Pressable,
 } from 'react-native';
 import React from 'react';
-
+import { useNavigation } from '@react-navigation/native';
 import { useFonts } from 'expo-font';
 // const screenHeight = Dimensions.get('window').height;
 // const screenWidth = Dimensions.get('window').width - 50;
 
 const ExhibitionItem = ({ exhibition }) => {
   const { title, poster, begindate, enddate, venues } = exhibition;
+  const navigation = useNavigation();
   const [fontsLoaded] = useFonts({
     'Poppins-Regular': require('../assets/fonts/Poppins-Regular.ttf'),
     'Poppins-Bold': require('../assets/fonts/Poppins-Bold.ttf'),
@@ -25,25 +27,31 @@ const ExhibitionItem = ({ exhibition }) => {
   }
 
   return (
-    <View style={styles.container}>
-      <ImageBackground
-        resizeMode="cover"
-        source={
-          poster
-            ? { uri: poster.imageurl }
-            : require('../assets/images/default.png')
-        }
-        style={styles.items}
-        imageStyle={{ opacity: 0.35 }}
-      >
-        <Text style={styles.title}>{title}</Text>
-        {/* <View style={styles.date_container}> */}
-        <Text style={styles.date}>
-          {begindate} <Text style={styles.date_mark}> to </Text> {enddate}{' '}
-        </Text>
-        <Text>{venues.map((item) => item.fullname)}</Text>
-      </ImageBackground>
-    </View>
+    <Pressable
+      onPress={() => {
+        navigation.navigate('ExhibitionInfo', { title: title });
+      }}
+    >
+      <View style={styles.container}>
+        <ImageBackground
+          resizeMode="cover"
+          source={
+            poster
+              ? { uri: poster.imageurl }
+              : require('../assets/images/default.png')
+          }
+          style={styles.items}
+          imageStyle={{ opacity: 0.35 }}
+        >
+          <Text style={styles.title}>{title}</Text>
+          {/* <View style={styles.date_container}> */}
+          <Text style={styles.date}>
+            {begindate} <Text style={styles.date_mark}> to </Text> {enddate}{' '}
+          </Text>
+          <Text>{venues.map((item) => item.fullname)}</Text>
+        </ImageBackground>
+      </View>
+    </Pressable>
   );
 };
 
