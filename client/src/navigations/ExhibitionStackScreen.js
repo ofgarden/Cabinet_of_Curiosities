@@ -1,6 +1,7 @@
 /* eslint-disable react/react-in-jsx-scope */
 import { createStackNavigator } from '@react-navigation/stack';
 import ExhibitionScreen from '../screens/ExhibitionScreen';
+import ExhibitionInfo from '../components/ExhibitionInfo';
 
 const Stack = createStackNavigator();
 
@@ -20,6 +21,7 @@ export default function ExhibitionStackScreen() {
       }}
     >
       <Stack.Screen name="Current" component={ExhibitionScreen} />
+      <Stack.Screen name="ExhibitionInfo" component={ExhibitionInfo} />
     </Stack.Navigator>
   );
 }
