@@ -27,31 +27,18 @@ const ExhibitionItem = ({ exhibition }) => {
   }
 
   return (
-    <Pressable
-      onPress={() => {
-        navigation.navigate('ExhibitionInfo', { exhibition });
-      }}
-    >
-      <View style={styles.container}>
-        <ImageBackground
-          resizeMode="cover"
-          source={
-            poster
-              ? { uri: poster.imageurl }
-              : require('../assets/images/default.png')
-          }
-          style={styles.items}
-          imageStyle={{ opacity: 0.35 }}
-        >
-          <Text style={styles.title}>{title}</Text>
-          {/* <View style={styles.date_container}> */}
-          <Text style={styles.date}>
-            {begindate} <Text style={styles.date_mark}> to </Text> {enddate}{' '}
-          </Text>
-          <Text>{venues.map((item) => item.fullname)}</Text>
-        </ImageBackground>
-      </View>
-    </Pressable>
+    <View style={styles.container}>
+      <ImageBackground
+        resizeMode="cover"
+        source={
+          poster
+            ? { uri: poster.imageurl }
+            : require('../assets/images/default.png')
+        }
+        style={styles.items}
+        imageStyle={{ opacity: 0.35 }}
+      ></ImageBackground>
+    </View>
   );
 };
 

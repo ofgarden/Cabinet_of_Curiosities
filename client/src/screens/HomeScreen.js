@@ -1,11 +1,21 @@
 import React from 'react';
-import { StyleSheet, SafeAreaView, Text } from 'react-native';
+import { StyleSheet, SafeAreaView, Text, FlatList } from 'react-native';
 
-const HomeScreen = () => {
+import HomeItem from '../components/HomeItem';
+
+const HomeScreen = ({ exhibitionData }) => {
+  // console.log('HOMESCREEN', exhibitionData.records);
+  console.log('from homeScreen', exhibitionData);
   return (
     <SafeAreaView style={styles.container}>
-      <Text>TODO: FROM API IMAGE 가져오기</Text>
-      <Text>수평으로 스크롤 할 수 있는 기능</Text>
+      <Text>TODO: 수평으로 스크롤 할 수 있는 기능</Text>
+      <FlatList
+        data={exhibitionData.records}
+        keyExtractor={(item, index) => index}
+        renderItem={({ item }) => {
+          return <HomeItem key={item.id} exhibition={item} />;
+        }}
+      />
     </SafeAreaView>
   );
 };

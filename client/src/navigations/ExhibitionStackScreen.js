@@ -5,7 +5,7 @@ import ExhibitionInfo from '../components/ExhibitionInfo';
 
 const Stack = createStackNavigator();
 
-export default function ExhibitionStackScreen() {
+export default function ExhibitionStackScreen({ exhibitionData }) {
   return (
     <Stack.Navigator
       screenOptions={{
@@ -20,7 +20,9 @@ export default function ExhibitionStackScreen() {
         },
       }}
     >
-      <Stack.Screen name="Current" component={ExhibitionScreen} />
+      <Stack.Screen name="Current">
+        {(props) => <ExhibitionScreen exhibitionData={exhibitionData} />}
+      </Stack.Screen>
       <Stack.Screen name="ExhibitionInfo" component={ExhibitionInfo} />
     </Stack.Navigator>
   );

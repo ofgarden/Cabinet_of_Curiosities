@@ -1,5 +1,7 @@
 /* eslint-disable react/no-unstable-nested-components */
 /* eslint-disable react/react-in-jsx-scope */
+import React, { useState, useEffect } from 'react';
+
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
@@ -12,12 +14,39 @@ import ProfileStackScreen from '../navigations/ProfileStackScreen';
 
 import { Ionicons, FontAwesome5, MaterialIcons } from '@expo/vector-icons';
 
+import { getExhibitions } from '../services/exhibitionService';
 // import { Dimensions } from 'react-native';
 // const fullScreenWidth = Dimensions.get('window').width;
 
 const Tab = createBottomTabNavigator();
 
 export default function Navigation() {
+  /*
+    state for exhibition
+
+    useEffect(()=>{
+      populate exhibition state
+    }, [])
+  */
+
+  const [exhibitionData, setExhibitionData] = useState('');
+
+  const fetchData = async () => {
+    try {
+      const result = await getExhibitions();
+      setExhibitionData(result);
+    } catch (error) {
+      console.log('[ERROR]', error);
+    }
+  };
+
+  useEffect(() => {
+    fetchData();
+    // console.log(data);
+  }, []);
+
+  // console.log('data from navigation', data.records);
+
   return (
     <NavigationContainer>
       <Tab.Navigator
@@ -32,24 +61,28 @@ export default function Navigation() {
       >
         <Tab.Screen
           name="HomeTab"
-          component={HomeStackScreen}
+          // component={HomeStackScreen}
           options={{
             // tabBarLabel: 'Home',
             tabBarIcon: ({ color, size }) => (
               <Ionicons name="home" color={color} size={size} />
             ),
           }}
-        />
+        >
+          {(props) => <HomeStackScreen exhibitionData={exhibitionData} />}
+        </Tab.Screen>
         <Tab.Screen
           name="current"
-          component={ExhibitionStackScreen}
+          // component={ExhibitionStackScreen}
           options={{
             // tabBarLabel: 'Current',
             tabBarIcon: ({ color, size }) => (
               <MaterialIcons name="museum" color={color} size={size} />
             ),
           }}
-        />
+        >
+          {(props) => <ExhibitionStackScreen exhibitionData={exhibitionData} />}
+        </Tab.Screen>
         <Tab.Screen
           name="ArtworkTab"
           component={ArtworkStackScreen}

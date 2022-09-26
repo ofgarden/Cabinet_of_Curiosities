@@ -1,21 +1,37 @@
 import React from 'react';
-import { View, Text, Image, StyleSheet } from 'react-native';
+import { View, Text, Image, StyleSheet, Dimensions } from 'react-native';
+import { useFonts } from 'expo-font';
 
 const ArtworkInfo = ({ artworks, selected }) => {
+  const [fontsLoaded] = useFonts({
+    'Poppins-Regular': require('../assets/fonts/Poppins-Regular.ttf'),
+    'Poppins-Bold': require('../assets/fonts/Poppins-Bold.ttf'),
+    'Poppins-SemiBold': require('../assets/fonts/Poppins-SemiBold.ttf'),
+    'Poppins-Medium': require('../assets/fonts/Poppins-Medium.ttf'),
+  });
+
+  if (!fontsLoaded) {
+    return null;
+  }
+
   return (
     <View style={styles.container}>
-      <View>
+      <View style={styles.image_container}>
         {artworks
           .filter((artwork) => {
             return artwork.id === selected;
           })
           .map((artwork, i) => {
             return (
-              <Image source={{ uri: artwork.image }} style={styles.imageBox} />
+              <Image
+                key={artwork.id}
+                source={{ uri: artwork.image }}
+                style={styles.image}
+              />
             );
           })}
       </View>
-      <Text style={styles.titleContainer}>
+      <Text style={styles.textContainer}>
         {artworks
           .filter((artwork) => {
             return artwork.id === selected;
@@ -24,9 +40,20 @@ const ArtworkInfo = ({ artworks, selected }) => {
             return (
               <>
                 {/* TODO: 어떻게 하면 분리 시키지/.?^^ */}
-                <Text style={styles.titleText}>{artwork.title}</Text>;
-                <Text>{artwork.artist}</Text>
-                <Text>{artwork.medium}</Text>
+                <Text key={artwork.id} style={styles.title}>
+                  {artwork.title}
+                  {'\n'}
+                  {'\n'}
+                </Text>
+                <Text>
+                  {artwork.artist}
+                  {'\n'}
+                </Text>
+                <Text style={styles.description}>
+                  {artwork.medium}
+                  {'\n'}
+                  {artwork.year}
+                </Text>
               </>
             );
           })}
@@ -42,23 +69,32 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     backgroundColor: 'white',
     flexDirection: 'column',
+    padding: 38,
   },
-  titleContainer: {
+  image_container: {
+    shadowColor: 'black',
+    shadowOpacity: 0.25,
+    shadowOffset: { width: 3, height: 1 },
+    shadowRadius: 2.5,
+  },
+  image: {
+    width: 300,
+    height: 300,
+  },
+  textContainer: {
     flex: 1,
-    borderWidth: 1,
-    borderColor: 'red',
+    // width: 320,
+    width: Dimensions.get('window').width,
+    paddingHorizontal: 20,
+    marginTop: 38,
   },
-  titleText: {
-    borderWidth: 1,
-    borderColor: 'red',
+  title: {
+    fontFamily: 'Poppins-SemiBold',
     fontSize: 25,
-    paddingVertical: 20,
   },
-  imageBox: {
-    width: 150,
-    height: 150,
-    borderColor: 'red',
-    borderWidth: 1,
+  description: {
+    fontFamily: 'Poppins-Regular',
+    textAlign: 'right',
   },
 });
 
