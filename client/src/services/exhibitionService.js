@@ -1,12 +1,17 @@
-// import axios from 'axios';
+import axios from 'axios';
+import { BASE_URL, API_KEY } from '@env';
 
-// const baseURL = 'http://api.kcisa.kr/openapi/service/rest/convergence/conver6';
-
-// export default getExhibition = () =>
-// const response = axios.get(baseURL, {
-//   params: {
-//     serviceKey: process.env.API_KEY,
-//     numOfRows: 1,
-//     pageNo: 10,
-//   },
-// });
+export async function getExhibitions() {
+  try {
+    const response = await axios.get(BASE_URL, {
+      params: {
+        apikey: API_KEY,
+        status: 'current',
+        page: 1,
+      },
+    });
+    return response.data;
+  } catch (error) {
+    console.error(error);
+  }
+}
