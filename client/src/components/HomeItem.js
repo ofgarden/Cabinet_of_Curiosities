@@ -27,26 +27,36 @@ const ExhibitionItem = ({ exhibition }) => {
   }
 
   return (
-    <View style={styles.container}>
-      <ImageBackground
-        resizeMode="cover"
-        source={
-          poster
-            ? { uri: poster.imageurl }
-            : require('../assets/images/default.png')
-        }
-        style={styles.items}
-        imageStyle={{ opacity: 0.35 }}
-      ></ImageBackground>
-    </View>
+    // <View style={styles.container}>
+    <ImageBackground
+      resizeMode="cover"
+      source={
+        poster
+          ? { uri: poster.imageurl }
+          : require('../assets/images/default.png')
+      }
+      style={styles.container}
+      imageStyle={{ opacity: 0.8 }}
+    ></ImageBackground>
+    // </View>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
-    paddingHorizontal: 15,
-    paddingVertical: 10,
+    felx: 1,
+    height: Dimensions.get('window').height - 79,
+    width: Dimensions.get('window').width,
+    // width: 100,
+    // height: 200,
+    justifyContent: 'center',
     alignItems: 'center',
+    // margin: 50,
+    // borderWidth: 1,
+    // borderColor: 'red',
+    // paddingHorizontal: 15,
+    // paddingVertical: 10,
+    // alignItems: 'center',
   },
   items: {
     flex: 1,
