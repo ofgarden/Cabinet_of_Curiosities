@@ -1,13 +1,13 @@
 import React from 'react';
 import { View, Text, Image, StyleSheet } from 'react-native';
 
-const ArtworkInfo = ({ artworks, test }) => {
+const ArtworkInfo = ({ artworks, selected }) => {
   return (
     <View style={styles.container}>
       <View>
         {artworks
           .filter((artwork) => {
-            return artwork.id === test;
+            return artwork.id === selected;
           })
           .map((artwork, i) => {
             return (
@@ -18,7 +18,7 @@ const ArtworkInfo = ({ artworks, test }) => {
       <Text style={styles.titleContainer}>
         {artworks
           .filter((artwork) => {
-            return artwork.id === test;
+            return artwork.id === selected;
           })
           .map((artwork, i) => {
             return (

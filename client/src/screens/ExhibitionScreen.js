@@ -1,26 +1,51 @@
-import React from 'react';
-import { StyleSheet, SafeAreaView, Text } from 'react-native';
+/* eslint-disable react-native/no-inline-styles */
+/* eslint-disable no-shadow */
+/* eslint-disable no-catch-shadow */
+import React, { useState, useEffect } from 'react';
+import { SafeAreaView, View, FlatList } from 'react-native';
+
+import { getExhibitions } from '../services/exhibitionService';
+
+import ExhibitionItem from '../components/ExhibitionItem';
 
 const ExhibitionScreen = () => {
+  const [data, setData] = useState('');
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
+
+  const fetchData = async () => {
+    try {
+      setError(null);
+      setLoading(true);
+
+      const result = await getExhibitions();
+      setData(result);
+    } catch (error) {
+      console.log('[ERROR]', error);
+      setError(error);
+    }
+    setLoading(false);
+  };
+
+  useEffect(() => {
+    fetchData();
+    // console.log(data);
+  }, []);
+
   return (
-    <SafeAreaView style={styles.container}>
-      <Text style={styles.contentContainer}>
-        TODO: SPECIFIC INFORMATION FROM API
-      </Text>
-      <Text>TODO: AVOID OVERWARP HEADER</Text>
+    <SafeAreaView>
+      <View style={{ backgroundColor: 'FFFFF3' }}>
+        {/* <Text>TODO: AVOID OVERWARP HEADER</Text> */}
+        <FlatList
+          data={data.records}
+          keyExtractor={(item, index) => index}
+          renderItem={({ item }) => {
+            return <ExhibitionItem key={item.id} exhibition={item} />;
+          }}
+        />
+      </View>
     </SafeAreaView>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    felx: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  // contentContainer: {
-  //   marginTop: 141,
-  // },
-});
 
 export default ExhibitionScreen;

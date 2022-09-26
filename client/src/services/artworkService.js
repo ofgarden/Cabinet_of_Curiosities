@@ -1,6 +1,6 @@
 import { db, auth } from '../../firebase';
 
-export const getArtwork = async () => {
+export const getArtworks = async () => {
   let user = auth.currentUser;
   // console.log('user: ', user.uid);
   let dbRef = db.collection('users').doc(user.uid).collection('artworks');

@@ -6,7 +6,19 @@ const Stack = createStackNavigator();
 
 export default function ExhibitionStackScreen() {
   return (
-    <Stack.Navigator screenOptions={{ headerTransparent: true }}>
+    <Stack.Navigator
+      screenOptions={{
+        headerStyle: {
+          backgroundColor: '#152238',
+        },
+        headerTitleAlign: 'left',
+        headerTintColor: '#FFFFF3',
+        headerTitleStyle: {
+          fontWeight: 'bold',
+          fontSize: '25',
+        },
+      }}
+    >
       <Stack.Screen name="Current" component={ExhibitionScreen} />
     </Stack.Navigator>
   );
