@@ -1,10 +1,9 @@
 /* eslint-disable react/no-unstable-nested-components */
 import React, { useState, useEffect } from 'react';
-import { Button } from 'react-native';
 
 import { createStackNavigator } from '@react-navigation/stack';
 import { useNavigation } from '@react-navigation/native';
-import { Ionicons } from '@expo/vector-icons';
+import { Ionicons, AntDesign } from '@expo/vector-icons';
 
 import { ArtworkContext } from '../contexts/ArtworkContext';
 import { getArtworks } from '../services/artworkService';
@@ -18,6 +17,7 @@ const Stack = createStackNavigator();
 export default function ArtworkStackScreen() {
   const [artworks, setArtworks] = useState([]);
   const [selected, setSelected] = useState(null);
+  const [numberOfArtworks, setNumberOfArtworks] = useState('');
   const navigation = useNavigation();
 
   async function updateArtworks() {
@@ -28,6 +28,8 @@ export default function ArtworkStackScreen() {
   useEffect(() => {
     updateArtworks();
   }, []);
+
+  // const deleteSubmit = async () => {};
 
   return (
     <ArtworkContext.Provider value={{ selected, setSelected }}>
@@ -56,7 +58,7 @@ export default function ArtworkStackScreen() {
           artworks={artworks}
           name="Artwork"
           options={{
-            headerTitle: 'Cabinet',
+            headerTitle: `Cabinet  ${numberOfArtworks}`,
             headerRight: () => (
               <Ionicons
                 onPress={() => navigation.navigate('AddArtwork')}
@@ -68,11 +70,29 @@ export default function ArtworkStackScreen() {
             ),
           }}
         >
-          {(props) => <ArtworkScreen artworks={artworks} />}
+          {(props) => (
+            <ArtworkScreen
+              artworks={artworks}
+              numberOfArtworks={numberOfArtworks}
+              setNumberOfArtworks={setNumberOfArtworks}
+            />
+          )}
         </Stack.Screen>
         <Stack.Screen
           name="ArtworkInfo"
-          options={{ headerTitle: '', headerBackTitleVisible: false }}
+          options={{
+            headerTitle: '',
+            headerBackTitleVisible: false,
+            headerRight: () => (
+              <AntDesign
+                name="delete"
+                size={20}
+                color="white"
+                style={{ paddingRight: 10 }}
+                onPress={() => {}}
+              />
+            ),
+          }}
         >
           {(props) => <ArtworkInfo artworks={artworks} selected={selected} />}
         </Stack.Screen>

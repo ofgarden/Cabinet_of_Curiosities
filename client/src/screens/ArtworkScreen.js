@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import {
   Dimensions,
   StyleSheet,
@@ -17,14 +17,16 @@ const screenHeight = Dimensions.get('window').height;
 const numColumns = 3;
 const imageSize = screenWidth / numColumns - 10;
 
-const ArtworkScreen = ({ artworks }) => {
+const ArtworkScreen = ({ artworks, numberOfArtworks, setNumberOfArtworks }) => {
   const { setSelected } = useContext(ArtworkContext);
   const navigation = useNavigation();
 
-  // const handleNavigation = (item) => {
-  // setTest(item.id); // 를 받아올 수가 없다.
-  //   navigation.navigate('ArtworkInfo');
-  // };
+  console.log(numberOfArtworks);
+
+  useEffect(() => {
+    const number = artworks.length;
+    setNumberOfArtworks(number);
+  }, [artworks.length, setNumberOfArtworks]);
 
   return (
     <View style={styles.container}>
