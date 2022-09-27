@@ -1,22 +1,16 @@
-/* eslint-disable react-native/no-inline-styles */
 import React from 'react';
 import {
+  Text,
+  View,
+  FlatList,
+  Dimensions,
   StyleSheet,
   SafeAreaView,
-  Text,
-  FlatList,
-  ScrollView,
-  Dimensions,
-  View,
 } from 'react-native';
-
-import HomeItem from '../components/HomeItem';
 import { useFonts } from 'expo-font';
+import HomeItem from '../components/HomeItem';
 
 const HomeScreen = ({ exhibitionData }) => {
-  // const { records } = exhibitionData;
-  // console.log('records', records);
-
   const [fontsLoaded] = useFonts({
     'Poppins-Regular': require('../assets/fonts/Poppins-Regular.ttf'),
     'Poppins-Bold': require('../assets/fonts/Poppins-Bold.ttf'),
@@ -33,21 +27,19 @@ const HomeScreen = ({ exhibitionData }) => {
       <Text style={styles.welcome}>Hello,{'\n'}Collector</Text>
       <Text style={styles.text}>Highlights</Text>
       <View style={styles.exhibition_container}>
-        {/* <HomeItem exhibition={exhibitionData.records} /> */}
         <FlatList
           horizontal
           data={exhibitionData.records}
           keyExtractor={(item, index) => index}
-          renderItem={({ item }) => {
-            return <HomeItem key={item.id} exhibition={item} />;
-          }}
+          renderItem={({ item }) =>
+            item.poster && <HomeItem key={item.id} exhibition={item} />
+          }
           snapToAlignment="start"
           decelerationRate={'fast'}
           snapToInterval={Dimensions.get('window').width}
         />
       </View>
     </SafeAreaView>
-    // <Text>TODO: 수평으로 스크롤 할 수 있는 기능</Text>
   );
 };
 
@@ -61,7 +53,7 @@ const styles = StyleSheet.create({
     fontFamily: 'Poppins-SemiBold',
     fontSize: 35,
     color: '#152238',
-    marginTop: 40,
+    marginTop: 30,
     marginBottom: 35,
     marginLeft: 30,
   },

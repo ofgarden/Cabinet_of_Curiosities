@@ -1,10 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { View, Text, SafeAreaView, StyleSheet, Image } from 'react-native';
-
+import { UserContext } from './src/contexts/UserContext';
 import Navigation from './src/navigations/Navigation';
 import LoginScreen from './src/screens/LoginScreen';
-
-import { UserContext } from './src/contexts/UserContext';
 
 export default function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);

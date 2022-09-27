@@ -38,7 +38,7 @@ export default function Navigation() {
         screenOptions={({ route }) => ({
           title: '',
           tabBarActiveTintColor: '#FFFFF3',
-          tabBarInactiveTintColor: '#D9D9D9',
+          tabBarInactiveTintColor: '#a9a9a9',
           tabBarLabelStyle: { fontSize: 10 },
           tabBarStyle: [{ display: 'flex', backgroundColor: '#152238' }, null],
           headerShown: false,
@@ -47,7 +47,7 @@ export default function Navigation() {
         <Tab.Screen
           name="HomeTab"
           options={{
-            tabBarLabel: 'Home',
+            // tabBarLabel: 'Home',
             tabBarIcon: ({ color, size }) => (
               <Ionicons name="home" color={color} size={size} />
             ),
@@ -59,7 +59,7 @@ export default function Navigation() {
           name="current"
           options={{
             unmountOnBlur: true,
-            tabBarLabel: 'Current',
+            // tabBarLabel: 'Current',
             tabBarIcon: ({ color, size }) => (
               <MaterialIcons name="museum" color={color} size={size} />
             ),
@@ -72,7 +72,7 @@ export default function Navigation() {
           component={ArtworkStackScreen}
           options={{
             unmountOnBlur: true,
-            tabBarLabel: 'Cabinet',
+            // tabBarLabel: 'Cabinet',
             tabBarIcon: ({ color, size }) => (
               <Ionicons name="color-palette" color={color} size={size} />
             ),
@@ -82,7 +82,7 @@ export default function Navigation() {
           name="TicketTab"
           component={TicketStackScreen}
           options={{
-            tabBarLabel: 'Ticket',
+            // tabBarLabel: 'Ticket',
             tabBarIcon: ({ color, size }) => (
               <FontAwesome5 name="ticket-alt" color={color} size={size} />
             ),
@@ -92,9 +92,10 @@ export default function Navigation() {
           name="ProfileTab"
           component={ProfileStackScreen}
           options={{
-            tabBarLabel: 'Profile',
+            unmountOnBlur: true,
+            // tabBarLabel: 'Profile',
             tabBarIcon: ({ color, size }) => (
-              <Ionicons name="ios-settings-sharp" color={color} size={size} />
+              <Ionicons name="person" color={color} size={size} />
             ),
           }}
         />

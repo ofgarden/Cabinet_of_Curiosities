@@ -1,13 +1,10 @@
 /* eslint-disable react/no-unstable-nested-components */
 import React, { useState, useEffect } from 'react';
-
 import { createStackNavigator } from '@react-navigation/stack';
 import { useNavigation } from '@react-navigation/native';
 import { Ionicons, AntDesign } from '@expo/vector-icons';
-
 import { ArtworkContext } from '../contexts/ArtworkContext';
 import { getArtworks } from '../services/artworkService';
-
 import ArtworkScreen from '../screens/ArtworkScreen';
 import ArtworkInfo from '../components/ArtworkInfo';
 import AddArtwork from '../components/AddArtwork';
@@ -17,6 +14,7 @@ const Stack = createStackNavigator();
 export default function ArtworkStackScreen() {
   const [artworks, setArtworks] = useState([]);
   const [selected, setSelected] = useState(null);
+  const [modalVisible, setModalVisible] = useState(false);
   const [numberOfArtworks, setNumberOfArtworks] = useState('');
   const navigation = useNavigation();
 
@@ -29,8 +27,6 @@ export default function ArtworkStackScreen() {
     updateArtworks();
   }, []);
 
-  // const deleteSubmit = async () => {};
-
   return (
     <ArtworkContext.Provider value={{ selected, setSelected }}>
       <Stack.Navigator
@@ -42,7 +38,7 @@ export default function ArtworkStackScreen() {
             <Ionicons
               name="ios-chevron-back"
               size={25}
-              color="white"
+              color="#FFFFF3"
               style={{ paddingLeft: 10 }}
             />
           ),
@@ -58,13 +54,16 @@ export default function ArtworkStackScreen() {
           artworks={artworks}
           name="Artwork"
           options={{
-            headerTitle: `Cabinet  ${numberOfArtworks}`,
+            headerTitle:
+              numberOfArtworks > 0
+                ? `Cabinet  ${numberOfArtworks}`
+                : 'Cabinet ',
             headerRight: () => (
               <Ionicons
                 onPress={() => navigation.navigate('AddArtwork')}
                 name="add-circle-outline"
                 size={25}
-                color="white"
+                color="#FFFFF3"
                 style={{ paddingRight: 10 }}
               />
             ),
@@ -87,14 +86,22 @@ export default function ArtworkStackScreen() {
               <AntDesign
                 name="delete"
                 size={20}
-                color="white"
+                color="#FFFFF3"
                 style={{ paddingRight: 10 }}
-                onPress={() => {}}
+                onPress={() => setModalVisible(true)}
               />
             ),
           }}
         >
-          {(props) => <ArtworkInfo artworks={artworks} selected={selected} />}
+          {(props) => (
+            <ArtworkInfo
+              artworks={artworks}
+              setArtworks={setArtworks}
+              selected={selected}
+              modalVisible={modalVisible}
+              setModalVisible={setModalVisible}
+            />
+          )}
         </Stack.Screen>
         <Stack.Screen
           name="AddArtwork"
