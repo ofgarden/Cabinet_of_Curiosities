@@ -18,7 +18,7 @@ export default function ExhibitionStackScreen({ exhibitionData }) {
           <Ionicons
             name="ios-chevron-back"
             size={25}
-            color="white"
+            color="#FFFFF3"
             style={{ paddingLeft: 10 }}
           />
         ),

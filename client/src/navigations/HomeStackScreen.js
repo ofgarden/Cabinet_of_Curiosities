@@ -6,7 +6,12 @@ const Stack = createStackNavigator();
 
 export default function HomeStackScreen({ exhibitionData }) {
   return (
-    <Stack.Navigator screenOptions={{ headerShown: false }}>
+    <Stack.Navigator
+      screenOptions={{
+        headerTransparent: true,
+        headerTitle: '',
+      }}
+    >
       <Stack.Screen name="Home">
         {(props) => <HomeScreen exhibitionData={exhibitionData} />}
       </Stack.Screen>

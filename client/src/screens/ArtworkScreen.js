@@ -21,8 +21,6 @@ const ArtworkScreen = ({ artworks, numberOfArtworks, setNumberOfArtworks }) => {
   const { setSelected } = useContext(ArtworkContext);
   const navigation = useNavigation();
 
-  console.log(numberOfArtworks);
-
   useEffect(() => {
     const number = artworks.length;
     setNumberOfArtworks(number);

@@ -1,39 +1,20 @@
+import React from 'react';
 import {
   View,
   Text,
   StyleSheet,
   Dimensions,
   ImageBackground,
-  Pressable,
-  Image,
 } from 'react-native';
-import React from 'react';
-import { useNavigation } from '@react-navigation/native';
-import { useFonts } from 'expo-font';
-// const screenHeight = Dimensions.get('window').height;
-// const screenWidth = Dimensions.get('window').width - 50;
 
 const ExhibitionItem = ({ exhibition }) => {
-  const { title, poster, begindate, enddate, venues } = exhibition;
-  const [fontsLoaded] = useFonts({
-    'Poppins-Regular': require('../assets/fonts/Poppins-Regular.ttf'),
-    'Poppins-Bold': require('../assets/fonts/Poppins-Bold.ttf'),
-    'Poppins-SemiBold': require('../assets/fonts/Poppins-SemiBold.ttf'),
-    'Poppins-Medium': require('../assets/fonts/Poppins-Medium.ttf'),
-  });
+  const { title, poster } = exhibition;
 
-  if (!fontsLoaded) {
-    return null;
-  }
   return (
     <View style={styles.container}>
       <ImageBackground
         resizeMode="cover"
-        source={
-          poster
-            ? { uri: poster.imageurl }
-            : require('../assets/images/default.png')
-        }
+        source={{ uri: poster.imageurl }}
         style={styles.items}
         imageStyle={{ opacity: 0.8 }}
       >
