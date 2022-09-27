@@ -40,12 +40,14 @@ const ArtworkInfo = ({ artworks, selected }) => {
             return (
               <>
                 {/* TODO: 어떻게 하면 분리 시키지/.?^^ */}
-                <Text key={artwork.id} style={styles.title}>
-                  {artwork.title}
-                  {'\n'}
-                  {'\n'}
+                <Text style={styles.title_container}>
+                  <Text key={artwork.id} style={styles.title}>
+                    {artwork.title}
+                    {'\n'}
+                    {'\n'}
+                  </Text>
                 </Text>
-                <Text>
+                <Text key={artwork.id + i}>
                   {artwork.artist}
                   {'\n'}
                 </Text>
@@ -88,9 +90,14 @@ const styles = StyleSheet.create({
     paddingHorizontal: 20,
     marginTop: 38,
   },
+  // title_container: {
+  //   felx: 1,
+  //   alignSelf: 'center',
+  // },
   title: {
     fontFamily: 'Poppins-SemiBold',
     fontSize: 25,
+    // textAlign: centert',
   },
   description: {
     fontFamily: 'Poppins-Regular',
