@@ -8,8 +8,9 @@ import {
   Text,
   View,
 } from 'react-native';
-import { auth } from '../../firebase';
+import * as ImagePicker from 'expo-image-picker';
 
+import { auth } from '../../firebase';
 import { UserContext } from '../contexts/UserContext';
 
 const LoginScreen = () => {
