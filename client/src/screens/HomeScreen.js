@@ -7,22 +7,9 @@ import {
   StyleSheet,
   SafeAreaView,
 } from 'react-native';
-import { useFonts } from 'expo-font';
 import HomeItem from '../components/HomeItem';
 
 const HomeScreen = ({ exhibitionData }) => {
-  const [fontsLoaded] = useFonts({
-    'Poppins-Regular': require('../assets/fonts/Poppins-Regular.ttf'),
-    'Poppins-Bold': require('../assets/fonts/Poppins-Bold.ttf'),
-    'Poppins-SemiBold': require('../assets/fonts/Poppins-SemiBold.ttf'),
-    'Poppins-Medium': require('../assets/fonts/Poppins-Medium.ttf'),
-    'Poppins-SemiBoldItalic': require('../assets/fonts/Poppins-SemiBoldItalic.ttf'),
-  });
-
-  if (!fontsLoaded) {
-    return null;
-  }
-
   return (
     <SafeAreaView style={styles.container}>
       <Text style={styles.welcome}>Hello,{'\n'}Collector</Text>
@@ -47,8 +34,6 @@ const HomeScreen = ({ exhibitionData }) => {
 const styles = StyleSheet.create({
   container: {
     felx: 1,
-    // justifyContent: 'center',
-    // alignItems: 'center',
   },
   welcome: {
     fontFamily: 'Poppins-SemiBold',
@@ -59,7 +44,7 @@ const styles = StyleSheet.create({
     marginLeft: 30,
   },
   text: {
-    marginBottom: 10,
+    marginBottom: 7,
     marginRight: 30,
     fontFamily: 'Poppins-Regular',
     fontSize: 14,
@@ -67,7 +52,6 @@ const styles = StyleSheet.create({
   },
   exhibition_container: {
     alignSelf: 'center',
-    // width: Dimensions.get('window').width - 40,
     height: Dimensions.get('window').height - 350,
     borderRadius: 20,
   },

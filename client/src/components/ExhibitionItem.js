@@ -1,3 +1,4 @@
+import React from 'react';
 import {
   View,
   Text,
@@ -6,10 +7,7 @@ import {
   ImageBackground,
   Pressable,
 } from 'react-native';
-import React from 'react';
 import { useNavigation } from '@react-navigation/native';
-// const screenHeight = Dimensions.get('window').height;
-// const screenWidth = Dimensions.get('window').width - 50;
 
 const ExhibitionItem = ({ exhibition }) => {
   const { title, poster, begindate, enddate, venues } = exhibition;
@@ -79,7 +77,6 @@ const styles = StyleSheet.create({
   date: {
     fontFamily: 'Poppins-Regular',
     fontSize: 12,
-    // borderWidth: 1,
   },
   date_mark: {
     fontSize: 11,

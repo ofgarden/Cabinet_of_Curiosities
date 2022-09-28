@@ -49,6 +49,7 @@ const LoginScreen = () => {
 
   return (
     <KeyboardAvoidingView style={styles.container} behavior="padding">
+      <Text style={styles.text}>Cabinet of Curiosities</Text>
       <View style={styles.inputContainer}>
         <TextInput
           placeholder="Email"
@@ -86,7 +87,18 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
   },
+  text: {
+    margin: 20,
+    color: '#152238',
+    fontFamily: 'FrederickatheGreat-Regular',
+    fontSize: 40,
+    textShadowColor: 'grey',
+    textShadowOpacity: 0.2,
+    textShadowOffset: { width: 2, height: 3 },
+    textShadowRadius: 2,
+  },
   inputContainer: {
+    marginTop: 20,
     width: '80%',
   },
   input: {
@@ -95,35 +107,39 @@ const styles = StyleSheet.create({
     paddingVertical: 10,
     borderRadius: 10,
     marginTop: 5,
+    borderBottomColor: '#152238',
+    borderBottomWidth: 2,
   },
   buttonContainer: {
     width: '60%',
     justifyContent: 'center',
     alignItems: 'center',
-    marginTop: 40,
+    marginTop: 70,
   },
   button: {
-    backgroundColor: 'lavender',
+    backgroundColor: '#152238',
     width: '100%',
-    padding: 15,
-    borderRadius: 10,
+    padding: 10,
+    borderRadius: 20,
     alignItems: 'center',
   },
   buttonOutline: {
     backgroundColor: 'white',
-    marginTop: 5,
-    borderColor: 'lavender',
+    marginTop: 10,
+    borderColor: '#152238',
     borderWidth: 2,
   },
   buttonText: {
     color: 'white',
+    fontFamily: 'Poppins-SemiBold',
     fontWeight: '700',
-    fontSize: 16,
+    fontSize: 15,
   },
   buttonOutlineText: {
-    color: 'lavender',
+    color: '#152238',
+    fontFamily: 'Poppins-SemiBold',
     fontWeight: '700',
-    fontSize: 16,
+    fontSize: 15,
   },
 });
 

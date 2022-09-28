@@ -1,4 +1,3 @@
-/* eslint-disable react/no-unstable-nested-components */
 import React, { useState, useEffect } from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
 import { useNavigation } from '@react-navigation/native';
@@ -72,7 +71,6 @@ export default function ArtworkStackScreen() {
           {(props) => (
             <ArtworkScreen
               artworks={artworks}
-              numberOfArtworks={numberOfArtworks}
               setNumberOfArtworks={setNumberOfArtworks}
             />
           )}

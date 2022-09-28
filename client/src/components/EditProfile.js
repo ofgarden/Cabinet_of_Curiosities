@@ -9,16 +9,14 @@ import {
   TouchableOpacity,
   Pressable,
   ImageBackground,
-  Dimensions,
 } from 'react-native';
 import * as Firebase from 'firebase';
 import * as ImagePicker from 'expo-image-picker';
-import { Ionicons, FontAwesome5, MaterialIcons } from '@expo/vector-icons';
-
-import { auth, db } from '../../firebase';
 import { useNavigation } from '@react-navigation/native';
+import { auth, db } from '../../firebase';
 
-const AddArtwork = ({ setArtworks }) => {
+const EditProfile = ({ route }) => {
+  const { profile, setProfile } = route.params;
   const [name, setName] = useState('');
   const [memo, setMemo] = useState('');
   const [profileImage, setProfileImage] = useState(null);
@@ -26,15 +24,12 @@ const AddArtwork = ({ setArtworks }) => {
   const navigation = useNavigation();
 
   const handlePickImage = async () => {
-    // No permissions request is necessary for launching the image library
     let result = await ImagePicker.launchImageLibraryAsync({
       mediaTypes: ImagePicker.MediaTypeOptions.All,
       allowsEditing: true,
       aspect: [4, 3],
       quality: 1,
     });
-
-    // console.log('result: ', result);
 
     if (!result.cancelled) {
       setProfileImage(result.uri);
@@ -96,12 +91,14 @@ const AddArtwork = ({ setArtworks }) => {
 
           console.log('saved: ', saved);
 
-          // Automatically, value updated
+          setProfile(saved);
+
           dbRef
             .set(saved)
             .then(() => {
-              setTimeout(() => {}, 10000);
-              navigation.navigate('Profile');
+              setTimeout(() => {
+                navigation.navigate('Profile');
+              }, 2000);
             })
             .catch((error) => {
               console.log(error);
@@ -122,11 +119,10 @@ const AddArtwork = ({ setArtworks }) => {
             <ImageBackground
               resizeMode="contain"
               source={require('../assets/images/mona-lisa-flaticon.png')}
-              imageStyle={{ opacity: 0.8 }}
+              imageStyle={{ opacity: 0.85 }}
             >
               <Text style={styles.imageBox} onPress={handlePickImage} />
             </ImageBackground>
-            {/* <Text>Choose a image</Text> */}
           </Pressable>
         )}
 
@@ -165,7 +161,6 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     padding: 16,
-    // backgroundColor: 'white',
   },
   header: {
     fontFamily: 'Poppins-SemiBold',
@@ -214,4 +209,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default AddArtwork;
+export default EditProfile;
