@@ -2,10 +2,10 @@
 is an iOS Application for art lovers to archive artworks
 
 # Tech stack
-Front-End
+Front-End\
 Expo React Native
 
-Back-End
+Back-End\
 Firebase
 - Authentication
 - Storage
