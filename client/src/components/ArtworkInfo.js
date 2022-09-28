@@ -1,15 +1,7 @@
 import React from 'react';
-import {
-  View,
-  Text,
-  Image,
-  StyleSheet,
-  Dimensions,
-  Modal,
-  Pressable,
-} from 'react-native';
-import { auth, db } from '../../firebase';
+import { View, Text, Image, StyleSheet, Modal, Pressable } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
+import { auth, db } from '../../firebase';
 
 const ArtworkInfo = ({
   artworks,
@@ -33,11 +25,16 @@ const ArtworkInfo = ({
       .catch((error) => {
         console.error('Error removing document: ', error);
       });
+
+    setModalVisible(!modalVisible);
+
     setArtworks((prev) => [
       ...prev.filter((artwork) => artwork.id !== selected),
     ]);
+
     navigation.navigate('Artwork');
   };
+
   return (
     <View style={styles.container}>
       <View style={styles.imageContainer}>
@@ -55,52 +52,45 @@ const ArtworkInfo = ({
             );
           })}
       </View>
-      <Text style={styles.textContainer}>
-        {artworks
-          .filter((artwork) => {
-            return artwork.id === selected;
-          })
-          .map((artwork, i) => {
-            return (
-              <View key={artwork.id}>
-                {/* TODO: 어떻게 하면 분리 시키지/.?^^ */}
-                <Text>
-                  <Text style={styles.title}>
-                    {artwork.title}
-                    {'\n'}
-                    {'\n'}
-                  </Text>
+      {artworks
+        .filter((artwork) => {
+          return artwork.id === selected;
+        })
+        .map((artwork, i) => {
+          return (
+            <Text key={artwork.id} style={styles.descriptionContainer}>
+              <View>
+                <Text style={styles.artist}>{artwork.artist}</Text>
+                <Text style={styles.titleNyear}>
+                  <Text style={styles.title}>{artwork.title}, </Text>
+                  <Text style={styles.year}> {artwork.year}</Text>
                 </Text>
-                <Text>
-                  {artwork.artist}
-                  {'\n'}
-                </Text>
-                <Text style={styles.description}>
-                  {artwork.medium}
-                  {'\n'}
-                  {artwork.year}
-                </Text>
+                <Text style={styles.medium}>{artwork.medium}</Text>
               </View>
-            );
-          })}
-      </Text>
+            </Text>
+          );
+        })}
 
       <Modal animationType="none" transparent={true} visible={modalVisible}>
         <View style={styles.centeredView}>
           <View style={styles.modalView}>
-            <Text style={styles.modalText}>Hello World!</Text>
-            <Pressable
-              style={[styles.button, styles.buttonClose]}
-              onPress={() => setModalVisible(!modalVisible)}
-            >
-              <Text style={styles.textStyle}>No</Text>
-            </Pressable>
-            <Pressable
-              style={[styles.button, styles.buttonClose]}
-              onPress={handleDelete}
-            >
-              <Text style={styles.textStyle}>DELETE</Text>
-            </Pressable>
+            <Text style={styles.modalText}>
+              Are you sure you want to delete this item?
+            </Text>
+            <View style={styles.buttonContainer}>
+              <Pressable
+                style={[styles.button, styles.buttonClose]}
+                onPress={() => setModalVisible(!modalVisible)}
+              >
+                <Text style={styles.closeText}>CLOSE</Text>
+              </Pressable>
+              <Pressable
+                style={[styles.button, styles.buttonDelete]}
+                onPress={handleDelete}
+              >
+                <Text style={styles.deleteText}>DELETE</Text>
+              </Pressable>
+            </View>
           </View>
         </View>
       </Modal>
@@ -111,9 +101,9 @@ const ArtworkInfo = ({
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    alignItems: 'center',
-    flexDirection: 'column',
     padding: 38,
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   imageContainer: {
     shadowColor: 'black',
@@ -125,25 +115,27 @@ const styles = StyleSheet.create({
     width: 300,
     height: 300,
   },
-  textContainer: {
-    flex: 1,
-    // width: 320,
-    width: Dimensions.get('window').width,
-    paddingHorizontal: 20,
+  descriptionContainer: {
     marginTop: 38,
   },
-  // title_container: {
-  //   felx: 1,
-  //   alignSelf: 'center',
-  // },
-  title: {
-    fontFamily: 'Poppins-SemiBold',
-    fontSize: 25,
-    // textAlign: centert',
+  titleContainer: {},
+  artist: {
+    fontFamily: 'Poppins-Medium',
+    fontSize: 18,
   },
-  description: {
+  titleNyear: {
+    marginTop: 3,
+    fontSize: 22,
+    marginBottom: 20,
+  },
+  title: {
+    fontFamily: 'Poppins-SemiBoldItalic',
+    color: '#152238',
+  },
+  medium: {
     fontFamily: 'Poppins-Regular',
     textAlign: 'right',
+    fontSize: 13,
   },
   centeredView: {
     flex: 1,
@@ -153,9 +145,9 @@ const styles = StyleSheet.create({
   },
   modalView: {
     margin: 20,
-    backgroundColor: 'white',
+    backgroundColor: '#f0f0f0',
     borderRadius: 20,
-    padding: 35,
+    padding: 20,
     alignItems: 'center',
     shadowColor: '#000',
     shadowOffset: {
@@ -166,24 +158,40 @@ const styles = StyleSheet.create({
     shadowRadius: 4,
     elevation: 5,
   },
+  buttonContainer: {
+    flexDirection: 'row',
+  },
   button: {
     borderRadius: 20,
     padding: 10,
     elevation: 2,
-  },
-  buttonOpen: {
-    backgroundColor: '#F194FF',
+    marginHorizontal: 15,
+    marginTop: 7,
   },
   buttonClose: {
-    backgroundColor: '#2196F3',
+    borderWidth: 5,
+    borderColor: '#152238',
   },
-  textStyle: {
+  buttonDelete: {
+    borderWidth: 5,
+    backgroundColor: '#152238',
+    borderColor: '#152238',
+  },
+  closeText: {
+    color: 'black',
+    fontWeight: 'bold',
+    textAlign: 'center',
+    fontFamily: 'Poppins-SemiBold',
+  },
+  deleteText: {
     color: 'white',
     fontWeight: 'bold',
     textAlign: 'center',
+    fontFamily: 'Poppins-SemiBold',
   },
   modalText: {
     marginBottom: 15,
+    fontFamily: 'Poppins-Regular',
     textAlign: 'center',
   },
 });

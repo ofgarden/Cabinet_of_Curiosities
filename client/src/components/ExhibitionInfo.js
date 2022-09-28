@@ -11,19 +11,10 @@ const ExhibitionInfo = ({ route }) => {
         <Text style={styles.title}>{exhibition.title}</Text>
         <View style={styles.dateContainer}>
           <Text style={styles.dateText}>{exhibition.begindate}</Text>
-          {/* <FontAwesome name="caret-right" size={18} color="black" /> */}
           <AntDesign name="caretright" size={12} color="black" />
           <Text style={styles.dateText}>{exhibition.enddate}</Text>
         </View>
         <Text style={styles.textContainer}>
-          {/* {'\n'} */}
-          {/* {exhibition.people ? (
-            <Text>
-              Curated by : {exhibition.people.map((item) => item.name)}
-            </Text>
-          ) : (
-            <Text></Text>
-          )} */}
           {'\n'}
           <Text style={styles.place}>
             {exhibition.venues.map((item) => item.fullname)}
@@ -98,7 +89,6 @@ const styles = StyleSheet.create({
     textAlign: 'right',
     color: '#152238',
   },
-  // descriptionContainer: { borderWidth: 1 },
   descriptionText: {
     fontFamily: 'Poppins-Regular',
     fontSize: 13,

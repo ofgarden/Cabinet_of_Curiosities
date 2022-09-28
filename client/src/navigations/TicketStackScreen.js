@@ -1,4 +1,3 @@
-/* eslint-disable react/react-in-jsx-scope */
 import { createStackNavigator } from '@react-navigation/stack';
 import { Ionicons } from '@expo/vector-icons';
 import TicketScreen from '../screens/TicketScreen';

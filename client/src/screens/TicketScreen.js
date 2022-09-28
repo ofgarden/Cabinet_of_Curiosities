@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, SafeAreaView, Text, Image } from 'react-native';
+import { StyleSheet, SafeAreaView, Image } from 'react-native';
 
 const TicketScreen = () => {
   return (

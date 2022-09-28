@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useEffect, useContext } from 'react';
 import {
   Dimensions,
   StyleSheet,
@@ -6,10 +6,8 @@ import {
   Pressable,
   Image,
   View,
-  Text,
 } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
-
 import { ArtworkContext } from '../contexts/ArtworkContext';
 
 const screenWidth = Dimensions.get('window').width - 50;
@@ -17,7 +15,7 @@ const screenHeight = Dimensions.get('window').height;
 const numColumns = 3;
 const imageSize = screenWidth / numColumns - 10;
 
-const ArtworkScreen = ({ artworks, numberOfArtworks, setNumberOfArtworks }) => {
+const ArtworkScreen = ({ artworks, setNumberOfArtworks }) => {
   const { setSelected } = useContext(ArtworkContext);
   const navigation = useNavigation();
 
@@ -58,7 +56,6 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     height: screenHeight,
-    // backgroundColor: 'white',
     paddingLeft: 20,
     paddingTop: 20,
   },

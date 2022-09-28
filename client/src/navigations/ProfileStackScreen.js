@@ -1,4 +1,4 @@
-/* eslint-disable react/react-in-jsx-scope */
+import React, { useState } from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
 import { useNavigation } from '@react-navigation/native';
 import { Ionicons, FontAwesome5 } from '@expo/vector-icons';
@@ -8,6 +8,7 @@ import EditProfile from '../components/EditProfile';
 const Stack = createStackNavigator();
 
 export default function ProfileStackScreen() {
+  const [profile, setProfile] = useState([]);
   const navigation = useNavigation();
   return (
     <Stack.Navigator
@@ -33,13 +34,12 @@ export default function ProfileStackScreen() {
     >
       <Stack.Screen
         name="Profile"
-        component={ProfileScreen}
         options={{
-          // headerTitle: `Cabinet  ${numberOfArtworks}`,
-          // eslint-disable-next-line react/no-unstable-nested-components
           headerRight: () => (
             <FontAwesome5
-              onPress={() => navigation.navigate('EditProfile')}
+              onPress={() =>
+                navigation.navigate('EditProfile', { profile, setProfile })
+              }
               name="user-edit"
               size={18}
               color="#FFFFF3"
@@ -47,7 +47,9 @@ export default function ProfileStackScreen() {
             />
           ),
         }}
-      />
+      >
+        {(props) => <ProfileScreen profile={profile} setProfile={setProfile} />}
+      </Stack.Screen>
       <Stack.Screen
         name="EditProfile"
         component={EditProfile}

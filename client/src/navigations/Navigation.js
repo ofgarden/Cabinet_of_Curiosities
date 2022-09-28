@@ -1,18 +1,13 @@
-/* eslint-disable react/no-unstable-nested-components */
 import React, { useState, useEffect } from 'react';
-
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { Ionicons, FontAwesome5, MaterialIcons } from '@expo/vector-icons';
-
-// Stacks
+import { getExhibitions } from '../services/exhibitionService';
+import HomeStackScreen from '../navigations/HomeStackScreen';
 import ExhibitionStackScreen from '../navigations/ExhibitionStackScreen';
 import ArtworkStackScreen from '../navigations/ArtworkStackScreen';
-import HomeStackScreen from '../navigations/HomeStackScreen';
 import TicketStackScreen from '../navigations/TicketStackScreen';
 import ProfileStackScreen from '../navigations/ProfileStackScreen';
-
-import { getExhibitions } from '../services/exhibitionService';
 
 const Tab = createBottomTabNavigator();
 

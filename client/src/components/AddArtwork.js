@@ -4,11 +4,11 @@ import {
   Text,
   TextInput,
   View,
-  Button,
   Image,
   ActivityIndicator,
   TouchableOpacity,
   Pressable,
+  ImageBackground,
 } from 'react-native';
 import * as Firebase from 'firebase';
 import * as ImagePicker from 'expo-image-picker';
@@ -28,15 +28,12 @@ const AddArtwork = ({ setArtworks }) => {
   const navigation = useNavigation();
 
   const handlePickImage = async () => {
-    // No permissions request is necessary for launching the image library
     let result = await ImagePicker.launchImageLibraryAsync({
       mediaTypes: ImagePicker.MediaTypeOptions.All,
       allowsEditing: true,
       aspect: [4, 3],
       quality: 1,
     });
-
-    // console.log('result: ', result);
 
     if (!result.cancelled) {
       setImage(result.uri);
@@ -118,62 +115,58 @@ const AddArtwork = ({ setArtworks }) => {
   };
 
   return (
-    <>
-      <View style={styles.container}>
-        {image ? (
-          <Image source={{ uri: image }} style={styles.imageBox} />
-        ) : (
-          <Pressable>
-            <Text style={styles.imageBox} onPress={handlePickImage}>
-              Select Image
-            </Text>
-          </Pressable>
-        )}
+    <View style={styles.container}>
+      {image ? (
+        <Image source={{ uri: image }} style={styles.imageBox} />
+      ) : (
+        <Pressable>
+          <ImageBackground
+            resizeMode="cover"
+            source={require('../assets/images/add-image-laticon.png')}
+            imageStyle={{ opacity: 0.85 }}
+          >
+            <Text style={styles.imageBox} onPress={handlePickImage} />
+          </ImageBackground>
+        </Pressable>
+      )}
 
-        <View style={styles.inputContainer}>
-          <TextInput
-            placeholder="Artist"
-            value={artist}
-            onChangeText={(text) => setArtist(text)}
-            style={styles.input}
-          />
-          <TextInput
-            placeholder="Title"
-            value={title}
-            onChangeText={(text) => setTitle(text)}
-            style={styles.input}
-          />
-          <TextInput
-            placeholder="Year"
-            value={year}
-            onChangeText={(text) => setYear(text)}
-            style={styles.input}
-          />
-          <TextInput
-            placeholder="Medium"
-            value={medium}
-            onChangeText={(text) => setMedium(text)}
-            style={styles.input}
-          />
-        </View>
-
-        <TouchableOpacity style={styles.buttonOutline}>
-          <Text>
-            {!uploading ? (
-              <Pressable onPress={handleSubmit}>
-                <View>
-                  {/* Text를 눌러야지만 동작..ㅡㅡ */}
-                  <Text style={styles.text}>Hello</Text>
-                </View>
-              </Pressable>
-            ) : (
-              // <Button title="Cabinet" onPress={handleSubmit} />
-              <ActivityIndicator size="small" color="#000" />
-            )}
-          </Text>
-        </TouchableOpacity>
+      <View style={styles.inputContainer}>
+        <TextInput
+          placeholder="Artist"
+          value={artist}
+          onChangeText={(text) => setArtist(text)}
+          style={styles.input}
+        />
+        <TextInput
+          placeholder="Title"
+          value={title}
+          onChangeText={(text) => setTitle(text)}
+          style={styles.input}
+        />
+        <TextInput
+          placeholder="Year"
+          value={year}
+          onChangeText={(text) => setYear(text)}
+          style={styles.input}
+        />
+        <TextInput
+          placeholder="Medium"
+          value={medium}
+          onChangeText={(text) => setMedium(text)}
+          style={styles.input}
+        />
       </View>
-    </>
+
+      <TouchableOpacity style={styles.collectButton}>
+        {!uploading ? (
+          <Pressable onPress={handleSubmit}>
+            <Text style={styles.collectText}>COLLECT</Text>
+          </Pressable>
+        ) : (
+          <ActivityIndicator size="small" color="#f0f0f0" />
+        )}
+      </TouchableOpacity>
+    </View>
   );
 };
 
@@ -182,18 +175,14 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: 'white',
   },
   imageBox: {
     width: 200,
     height: 200,
-    borderColor: '#D9D9D9',
-    borderWidth: 1,
-    borderRadius: 10,
+    borderRadius: 15,
   },
   inputContainer: {
     width: '80%',
-    borderWidth: 1,
     marginTop: 30,
   },
   input: {
@@ -201,16 +190,21 @@ const styles = StyleSheet.create({
     paddingHorizontal: 15,
     paddingVertical: 10,
     borderRadius: 10,
-    marginTop: 5,
+    marginTop: 7,
   },
-  buttonOutline: {
-    width: '30%',
-    padding: 5,
+  collectButton: {
+    width: 100,
+    padding: 10,
+    marginTop: 50,
+    elevation: 2,
     borderRadius: 20,
-    backgroundColor: 'white',
-    marginTop: 30,
-    borderColor: 'lavender',
-    borderWidth: 2,
+    backgroundColor: '#152238',
+  },
+  collectText: {
+    color: 'white',
+    fontWeight: 'bold',
+    textAlign: 'center',
+    fontFamily: 'Poppins-SemiBold',
   },
 });
 

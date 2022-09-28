@@ -1,6 +1,5 @@
-/* eslint-disable react/react-in-jsx-scope */
 import { createStackNavigator } from '@react-navigation/stack';
-import { Ionicons, FontAwesome5, MaterialIcons } from '@expo/vector-icons';
+import { Ionicons } from '@expo/vector-icons';
 
 import ExhibitionScreen from '../screens/ExhibitionScreen';
 import ExhibitionInfo from '../components/ExhibitionInfo';
