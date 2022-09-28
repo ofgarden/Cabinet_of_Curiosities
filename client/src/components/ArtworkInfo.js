@@ -1,7 +1,7 @@
 import React from 'react';
 import { View, Text, Image, StyleSheet, Modal, Pressable } from 'react-native';
-import { auth, db } from '../../firebase';
 import { useNavigation } from '@react-navigation/native';
+import { auth, db } from '../../firebase';
 
 const ArtworkInfo = ({
   artworks,
@@ -25,6 +25,8 @@ const ArtworkInfo = ({
       .catch((error) => {
         console.error('Error removing document: ', error);
       });
+
+    setModalVisible(!modalVisible);
 
     setArtworks((prev) => [
       ...prev.filter((artwork) => artwork.id !== selected),
