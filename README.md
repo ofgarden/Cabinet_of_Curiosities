@@ -6,7 +6,7 @@ is an iOS Application for art lovers to archive artworks
 0. Setting up Firebase
   Authentication, Firestore Database, Storage
 
-# Installation
+### Installation
 1. Clone this repo
 
 ```bash
