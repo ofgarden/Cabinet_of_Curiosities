@@ -1,9 +1,12 @@
 # Cabinet of Curiosities
-is an iOS Application for art lovers to archive artworks
+An iOS Application for art lovers to archive artworks
+
+![screenshot-readme](https://user-images.githubusercontent.com/102771075/193109490-59a3357d-6de9-4dab-b275-298b6b08e97c.png)
+
 
 ## Getting Started
 
-0. Setting up Firebase
+0. Setting Firebase
   Authentication, Firestore Database, Storage
 
 ### Installation
