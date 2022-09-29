@@ -1,5 +1,5 @@
 # Cabinet of Curiosities
-An iOS Application for art lovers to archive artworks
+Cabinet of Curiosities is a mobile app (iOS) aimed at art lovers who want to archive artworks on their phones!
 
 ![screenshot-readme](https://user-images.githubusercontent.com/102771075/193109490-59a3357d-6de9-4dab-b275-298b6b08e97c.png)
 
