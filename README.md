@@ -31,11 +31,4 @@ expo start
 
 
 ## Tech stack
-Front-End\
-<img src="https://img.shields.io/badge/Expo-000020?style=flat-square&logo=Expo&logoColor=white"/>
-<img src="https://img.shields.io/badge/React Native-61DAFB?style=flat-square&logo=React&logoColor=black"/>
-
-Back-End\
-<img src="https://img.shields.io/badge/Firebase Authentication-FFCA28?style=flat-square&logo=Firebase&logoColor=black"/>
-<img src="https://img.shields.io/badge/Storage-FFCA28?style=flat-square&logo=Firebase&logoColor=black"/>
-<img src="https://img.shields.io/badge/Cloud Firestore-FFCA28?style=flat-square&logo=Firebase&logoColor=black"/>
+<img src="https://img.shields.io/badge/Expo-000020?style=flat-square&logo=Expo&logoColor=white"/> <img src="https://img.shields.io/badge/React Native-61DAFB?style=flat-square&logo=React&logoColor=black"/> <img src="https://img.shields.io/badge/Firebase Authentication-FFCA28?style=flat-square&logo=Firebase&logoColor=black"/> <img src="https://img.shields.io/badge/Storage-FFCA28?style=flat-square&logo=Firebase&logoColor=black"/> <img src="https://img.shields.io/badge/Cloud Firestore-FFCA28?style=flat-square&logo=Firebase&logoColor=black"/>
