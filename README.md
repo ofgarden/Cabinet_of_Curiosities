@@ -8,7 +8,7 @@ Cabinet of Curiosities is a mobile app (iOS) aimed at art lovers who want to arc
 In order to start the project, the following list must be set first.
 
 * #### Getting API Key
-   This project is using Harvard Art Museum API, please go to the [link](https://harvardartmuseums.org/collections/api).
+   This project is using Harvard Art Museum API, please go to the [link](https://harvardartmuseums.org/collections/api).\
    And, follow the step in order to obtain your key.
 
 * #### Setting Firebase
