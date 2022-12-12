@@ -15,7 +15,7 @@ In order to start the project, the following list must be set first.
    Authentication, Firestore Database, Storage   
 
 
-### Installation
+## Installation
 
 1. Clone this repo
 ```bash
