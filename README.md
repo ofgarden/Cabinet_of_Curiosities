@@ -14,6 +14,11 @@ In order to start the project, the following list must be set first.
 * #### Getting API Key
    This project is using Harvard Art Museum API, please go to the [link](https://harvardartmuseums.org/collections/api).
    1) Follow the steps in order to obtain your key.
+   2) Create .env file at the root level (client folder) and copy the code below.
+      ```bash
+      BASE_URL = 'https://api.harvardartmuseums.org/exhibition'
+      API_KEY = PLEASE ENTER YOUR API KEY 
+      ```
 
 * #### Setting Firebase
    Authentication, Firestore Database, Storage   
